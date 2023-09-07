@@ -48,7 +48,7 @@ export const lightTheme = {
   white: '#FFFFFF',
   iconColor: '#3B63A9',
   background: '#FFFFFF',
-  text: '#000',
+  text: '#3B63A9',
   lightGray: '#dfdede',
   halfWhite: '#F6F6F6',
   halfGray: '#B4B4B4',

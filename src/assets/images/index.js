@@ -7,3 +7,4 @@ export {default as user} from './user.png';
 export {default as ford} from './ford.png';
 export {default as forklift} from './forklift-handling-ca.png';
 export {default as SplashImg} from './splashimg.jpg';
+export {default as LoginImg} from './login.png';

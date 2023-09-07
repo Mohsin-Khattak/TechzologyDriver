@@ -4,7 +4,7 @@ import {Formik} from 'formik';
 
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 
 import {useTheme} from '@react-navigation/native';
 import {SplashIcon} from 'assets/icons';
@@ -21,6 +21,7 @@ import {UTILS} from 'utils';
 import {signinFormValidation} from 'validations';
 import styles from './styles';
 import {useAppDispatch} from 'hooks/use-store';
+import {LoginImg} from 'assets/images';
 const LoginScreen = props => {
   const colors = useTheme().colors;
   const dispatch = useAppDispatch();
@@ -79,11 +80,11 @@ const LoginScreen = props => {
                   backgroundColor: colors.background,
                 }}>
                 <KeyboardAvoidScrollview>
-                  <LottieAnimation style={styles.lottie} src={loginJson} />
+                  <Image source={LoginImg} style={styles.lottie} />
                   <Bold
                     color={colors.text}
                     style={styles.loginTexhzologyContainer}
-                    label={t('login_in_to_techzology_ecommerces')}
+                    label={t('login_in_to_techzology_delivery_boy')}
                   />
                   <PrimaryInput
                     keyboardType={'email-address'}
@@ -114,7 +115,10 @@ const LoginScreen = props => {
                   <TouchableOpacity
                     style={{alignSelf: 'flex-end', marginBottom: mvs(15)}}
                     onPress={() => navigate('ForgotPassword')}>
-                    <Bold color={colors.text} label={t('Forgot Password?')} />
+                    <Bold
+                      color={colors.text}
+                      label={t('or_login_with_phone_number')}
+                    />
                   </TouchableOpacity>
                   <PrimaryButton
                     loading={loading}
@@ -123,32 +127,14 @@ const LoginScreen = props => {
                   />
                   <Regular
                     color={colors.text}
-                    label={t('or_create_a_new_account')}
+                    label={t('fingind_problem')}
                     fontSize={mvs(10)}
-                    style={{alignSelf: 'center', marginTop: mvs(12)}}
-                  />
-                  <PrimaryButton
-                    title={t('signup')}
-                    onPress={() => navigate('Signup')}
-                    containerStyle={{
-                      backgroundColor: colors.green,
+                    style={{
+                      alignSelf: 'center',
                       marginTop: mvs(12),
+                      textAlign: 'center',
                     }}
                   />
-                  {/* <Regular
-                    color={colors.text}
-                    label={t('login_with')}
-                    fontSize={mvs(10)}
-                    style={{alignSelf: 'center', marginTop: mvs(12)}}
-                  />
-                  <Row style={{paddingHorizontal: mvs(35), marginTop: mvs(12)}}>
-                    <TouchableOpacity>
-                      <Regular color={colors.text} label={t('Google')} />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Regular color={colors.text} label={t('Facebook')} />
-                    </TouchableOpacity>
-                  </Row> */}
                 </KeyboardAvoidScrollview>
               </View>
             </View>

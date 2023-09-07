@@ -110,7 +110,7 @@ export const TabBar = props => {
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Home" component={HomeTab} />
       <Tab.Screen name="Categories" component={CategoriesTab} />
-      <Tab.Screen name="Message" component={MessageTab} />
+      {/* <Tab.Screen name="Message" component={MessageTab} /> */}
       <Tab.Screen name="Cart" component={CartTab} />
       {/* {/* <Tab.Screen name="Categories" component={CategoriesTab} /> */}
       <Tab.Screen name="Me" component={UserTab} />

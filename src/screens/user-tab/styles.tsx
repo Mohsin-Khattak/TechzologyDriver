@@ -1,58 +1,53 @@
-import { StyleSheet } from 'react-native';
-import { mvs, width } from 'config/metrices';
+import { Platform, StyleSheet } from 'react-native';
 import { colors } from 'config/colors';
+import { mvs } from 'config/metrices';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
-
-  },
-  loginBtn: {
     backgroundColor: colors.white,
-    width: mvs(100),
-    height: mvs(38)
   },
-  backgroudImage: {
-    width: mvs(51),
-    height: mvs(51),
+
+  imageBackGround: {
+    width: mvs(82),
+    height: mvs(82),
+    // borderWidth: 1,
+
+    // borderColor: colors.primary,
+    alignSelf: 'center',
   },
-  boxContainer: {
-    backgroundColor: colors.white,
-    width: mvs(100),
-    paddingVertical: mvs(16),
-    paddingHorizontal: mvs(5),
-    alignItems: 'center',
-    borderRadius: mvs(10)
+  name: {
+    marginTop: mvs(10),
+    alignSelf: 'center',
   },
-  itemsContainer: {
-    width: mvs(73),
-    height: mvs(73),
-    borderRadius: mvs(56),
-    alignItems: 'center',
-    justifyContent: 'center',
+  email: {
+    alignSelf: 'center',
+    fontSize: mvs(12),
   },
-  innerItems: {
-    // width: mvs(60),
-    // height: mvs(60),
-    // backgroundColor: colors.blueHalf,
-    // borderRadius: mvs(56),
-    alignItems: 'center',
-    justifyContent: 'center',
+  editBtn: {
+    position: 'absolute',
+    zIndex: 1,
+    top: mvs(40),
+    // left: mvs(70),
+    right: mvs(-5),
   },
-  boxContainer1: {
+  innerContainer: {
     width: '100%',
-    backgroundColor: colors.white,
-    height: mvs(150),
-    marginTop: mvs(25),
-    borderRadius: mvs(10),
-    padding: mvs(15),
-  },
-  topContainer: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: mvs(20),
-    height: mvs(500),
-  }
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
 
+    elevation: 7,
+    // height: 250,
+    backgroundColor: colors.white,
+    marginTop: mvs(20),
+    borderRadius: mvs(10),
+    paddingHorizontal: mvs(20),
+    paddingVertical: mvs(20),
+  },
 });
 export default styles;

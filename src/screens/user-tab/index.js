@@ -1,279 +1,103 @@
-import {
-  Carttt,
-  Currency,
-  Heart,
-  Language,
-  Location,
-  Message,
-  Pc,
-  Refund,
-  Shop,
-  UserEdit,
-  Wallet,
-} from 'assets/icons';
-import {user} from 'assets/images';
+import {Edit} from 'assets/icons';
 import {PrimaryButton} from 'components/atoms/buttons';
-import {Row} from 'components/atoms/row';
+import AppHeader from 'components/atoms/headers/app-header';
+import PrimaryInput from 'components/atoms/inputs';
+import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
+import UpdatedPasswordModal from 'components/molecules/modals/updated-password-modal';
+import UpdatedProfileModal from 'components/molecules/modals/updated-profile-modal';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
-import {navigate, resetStack} from 'navigation/navigation-ref';
 import React from 'react';
-import {Alert, ImageBackground, TouchableOpacity, View} from 'react-native';
-import {logout} from 'services/api/auth-api-actions';
-import Bold from 'typography/bold-text';
+import {
+  Alert,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
+import Bold from 'typography/bold-text';
 
 const UserTab = props => {
   const colors = useTheme().colors;
 
-  const [loading, setLoading] = React.useState(false);
-  const LogOut = async () => {
+  const [image, setImage] = React.useState();
+  const [updatedModal, setUpdatedModal] = React.useState(false);
+  const [passwordModal, setPasswordModal] = React.useState(false);
+  const openGallery = async () => {
     try {
-      setLoading(true);
-      const res = await logout();
-      Alert.alert(res?.message);
-      await UTILS.clearStorage();
-      resetStack('Login');
+      const res = await UTILS._returnImageGallery();
+      console.log(res);
+      setImage(res);
     } catch (error) {
-      console.log('Error===>', UTILS.returnError(error));
-    } finally {
-      setLoading(false);
+      console.log('upload image error', error);
+      Alert.alert('Error', UTILS?.returnError(error));
     }
   };
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <View style={{...styles.topContainer, backgroundColor: colors.primary}}>
-        <Row style={{marginTop: mvs(25), justifyContent: 'flex-start'}}>
-          <ImageBackground
-            source={user}
-            style={styles.backgroudImage}></ImageBackground>
-          <View style={{flex: 1, marginLeft: mvs(10)}}>
-            <Regular color={colors.white} label={'Paul K. Jensen'} />
-            <Regular
-              fontSize={mvs(12)}
-              numberOfLines={1}
-              color={colors.white}
-              label={'customer@example.com'}
-            />
-          </View>
-          <PrimaryButton
-            loading={loading}
-            onPress={() => LogOut()}
-            textStyle={{color: colors.text}}
-            title={t('log_out')}
-            containerStyle={{
-              ...styles.loginBtn,
-              backgroundColor: colors.background,
-            }}
+      <AppHeader back title={t('edit_profile')} />
+      <KeyboardAvoidScrollview
+        contentContainerStyle={{paddingBottom: mvs(20), marginTop: mvs(50)}}>
+        <ImageBackground
+          source={{
+            uri: 'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg',
+          }}
+          borderRadius={mvs(100)}
+          style={styles.imageBackGround}>
+          <Image
+            source={image}
+            style={{width: '100%', height: '100%', borderRadius: mvs(100)}}
           />
-        </Row>
-        <Row style={{marginTop: mvs(25)}}>
-          <View
-            style={{
-              ...styles.boxContainer,
-              backgroundColor: colors.background,
-            }}>
-            <Bold color={colors.text} label={'01'} />
-            <Regular
-              fontSize={mvs(10)}
-              color={colors.text}
-              label={t('in_your_cart')}
-            />
-          </View>
-          <View
-            style={{
-              ...styles.boxContainer,
-              backgroundColor: colors.background,
-            }}>
-            <Bold color={colors.text} label={'07'} />
-            <Regular
-              fontSize={mvs(10)}
-              color={colors.text}
-              label={t('in_your_wishlist')}
-            />
-          </View>
-          <View
-            style={{
-              ...styles.boxContainer,
-              backgroundColor: colors.background,
-            }}>
-            <Bold color={colors.text} label={'75'} />
-            <Regular
-              fontSize={mvs(10)}
-              color={colors.text}
-              label={t('your_ordered')}
-            />
-          </View>
-        </Row>
-        <Row style={{marginTop: mvs(25)}}>
-          <TouchableOpacity style={{alignItems: 'center'}}>
-            <View
-              style={{
-                ...styles.itemsContainer,
-                borderRadius: mvs(56),
-                backgroundColor: colors.background,
-              }}>
-              <Language />
-            </View>
-            <Regular
-              color={colors.white}
-              label={t('language')}
-              fontSize={mvs(10)}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={{alignItems: 'center'}}>
-            <View
-              style={{
-                ...styles.itemsContainer,
-                backgroundColor: colors.background,
-              }}>
-              <Currency />
-            </View>
-            <Regular
-              color={colors.white}
-              label={t('currency')}
-              fontSize={mvs(10)}
-            />
-          </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigate('EditProfile')}
-            style={{alignItems: 'center'}}>
-            <View
-              style={{
-                ...styles.itemsContainer,
-                borderRadius: mvs(56),
-                backgroundColor: colors.background,
-              }}>
-              <UserEdit />
-            </View>
-            <Regular
-              color={colors.white}
-              label={t('user_edit')}
-              fontSize={mvs(10)}
-            />
+            onPress={() => openGallery()}
+            style={styles.editBtn}>
+            <Edit />
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigate('AddressDetails')}
-            style={{alignItems: 'center'}}>
-            <View
-              style={{
-                ...styles.itemsContainer,
-                backgroundColor: colors.background,
-                borderRadius: mvs(56),
-              }}>
-              <Location />
-            </View>
-            <Regular
-              color={colors.white}
-              label={t('address')}
-              fontSize={mvs(10)}
-            />
-          </TouchableOpacity>
-        </Row>
-        <View
-          style={{...styles.boxContainer1, backgroundColor: colors.background}}>
-          <Row style={{marginTop: mvs(10)}}>
-            <TouchableOpacity
-              onPress={() => navigate('MyWallet')}
-              style={{alignItems: 'center'}}>
-              <View style={styles.innerItems}>
-                <Wallet />
-              </View>
-              <Regular
-                color={colors.text}
-                style={{marginTop: mvs(5)}}
-                label={t('my_wallet')}
-                fontSize={mvs(10)}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigate('OrderHistory')}
-              style={{alignItems: 'center'}}>
-              <View style={styles.innerItems}>
-                <Carttt />
-              </View>
+        </ImageBackground>
 
-              <Regular
-                color={colors.text}
-                style={{marginTop: mvs(5)}}
-                label={t('orders')}
-                fontSize={mvs(10)}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigate('MyWishList')}
-              style={{alignItems: 'center'}}>
-              <View style={styles.innerItems}>
-                <Heart />
-              </View>
+        <Medium
+          color={colors.text}
+          style={styles.name}
+          label={'Paul K. Jensen'}
+        />
+        <Regular
+          color={colors.text}
+          style={styles.email}
+          label={'customer1@example.com'}
+        />
 
-              <Regular
-                color={colors.text}
-                style={{marginTop: mvs(5)}}
-                label={t('my_wishlist')}
-                fontSize={mvs(10)}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigate('RefundStatus')}
-              style={{alignItems: 'center'}}>
-              <View style={styles.innerItems}>
-                <Refund />
-              </View>
+        <Bold
+          color={colors.text}
+          style={{marginTop: mvs(20)}}
+          label={t('basic_information')}
+        />
+        <PrimaryInput
+          containerStyle={{marginTop: mvs(40)}}
+          placeholder={t('name')}
+        />
 
-              <Regular
-                color={colors.text}
-                style={{marginTop: mvs(5)}}
-                numberOfLines={2}
-                label={t('refund_requests')}
-                fontSize={mvs(10)}
-              />
-            </TouchableOpacity>
-          </Row>
-          <Row style={{marginTop: mvs(10)}}>
-            <TouchableOpacity style={{alignItems: 'center'}}>
-              <View style={styles.innerItems}>
-                <Message />
-              </View>
-              <Regular
-                color={colors.text}
-                style={{marginTop: mvs(5)}}
-                label={t('messages')}
-                fontSize={mvs(10)}
-              />
-            </TouchableOpacity>
-          </Row>
-        </View>
-      </View>
-      <View style={{paddingHorizontal: mvs(20), marginTop: mvs(30)}}>
-        <TouchableOpacity onPress={() => navigate('BrowseAllVenders')}>
-          <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
-            <Shop />
-            <Regular
-              color={colors.text}
-              style={{marginLeft: mvs(20)}}
-              label={t('browse_all_vendors')}
-            />
-          </Row>
-        </TouchableOpacity>
-        <Row
-          style={{
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            marginTop: mvs(20),
-          }}>
-          <Pc />
-          <Regular
-            color={colors.text}
-            style={{marginLeft: mvs(20)}}
-            label={t('followed_vendors')}
-          />
-        </Row>
-      </View>
+        <PrimaryInput placeholder={t('new_password')} />
+        <PrimaryInput placeholder={t('retype_password')} />
+        <PrimaryButton
+          onPress={() => setUpdatedModal(true)}
+          title={t('update_profile')}
+        />
+
+        <UpdatedProfileModal
+          onClose={() => setUpdatedModal(false)}
+          visible={updatedModal}
+        />
+        <UpdatedPasswordModal
+          onClose={() => setPasswordModal(false)}
+          visible={passwordModal}
+        />
+      </KeyboardAvoidScrollview>
     </View>
   );
 };

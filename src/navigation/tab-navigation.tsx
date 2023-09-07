@@ -16,10 +16,10 @@ const TabNavigator = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        unmountOnBlur: true,
+        unmountOnBlur: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = 'home';
-          if (route.name === 'HomeTab') {
+          if (route.name === 'Dashboard') {
             iconName = 'home';
           } else if (route.name === 'CategoriesTab') {
             iconName = 'search';
@@ -31,11 +31,12 @@ const TabNavigator = () => {
         },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: 'gray',
-      })}>
+      })}
+    >
       <BottomTab.Screen name="HomeTab" component={HomeTab} />
       <BottomTab.Screen name="CategoriesTab" component={CategoriesTab} />
       <BottomTab.Screen name="UserTab" component={UserTab} />
-    </Tab.Navigator>
+    </Tab.Navigator >
   );
 };
 export default TabNavigator;

@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
     // backgroundColor: colors.white,
   },
   lottie: {
-    height: mvs(100),
-    width: mvs(100),
+    width: mvs(140),
+    height: mvs(140),
     alignSelf: 'center',
     marginTop: mvs(20),
   },

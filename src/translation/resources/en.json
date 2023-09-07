@@ -92,13 +92,12 @@
   "inhouse":"Inhouse",
   "message":"Message",
   "password":"Password",
-  "login_in_to_techzology_ecommerces":"Login in to techzology ecommerces",
   "or_create_a_new_account":"Or Create A New Account",
   "signup":"Sign up",
   "login_with":"Login with",
   "Google":"Google",
   "Facebook":"Facebook",
-  "signup_up_to_techzology_ecommerces":"Sign up to techzology ecommerces",
+  
   "confirm_pass":"Confirm Password",
   "i_agree_the":"I agree the",
   "terms_and_condition":"Terms and conditions,",
@@ -129,7 +128,13 @@
   "shipping_cost":"Shipping Cost",
   "return_policy":"Return Policy",
   "resend_otp_code":"Resend OTP Code",
-  "see_all":"See All"
+  "see_all":"See All",
+
+  //delivery boy
+  "login_in_to_techzology_delivery_boy":"Login in to techzology delivery boy",
+  "or_login_with_phone_number":"Or, Login with a phone number",
+  "fingind_problem":"If you are finding any problem while logging in please contact the admin"
+
 
 
 

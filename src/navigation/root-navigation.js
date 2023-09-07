@@ -6,8 +6,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import LoginScreen from 'screens/login-screen';
 import Splash from 'screens/splash';
 import {horizontalAnimation} from '../utils';
-// import TabNavigator from './tab-navigation';
 import {useTheme} from '@react-navigation/native';
+import DrawerNavigator from './drawer-navigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +28,7 @@ export const RootNavigator = () => {
         <Stack.Group>
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Drawer" component={DrawerNavigator} />
         </Stack.Group>
       </Stack.Navigator>
     </View>
