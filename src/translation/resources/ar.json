@@ -1,0 +1,172 @@
+{
+ 
+  "order":"طلب",
+  "message_seller":"مراسلة البائع",
+  "inhouse_product":"منتج داخلي",
+  "add_to_cart":"أضف إلى السلة",
+  "buy_now":"اشتري الآن",
+  "quantity":"كمية",
+  "shopping_cart":"عربة التسوق",
+  "my_wishlist":"قائمة امنياتي",
+  "my_wallet":"محفظتى",
+  "wallet_balance":"رصيد المحفظة",
+  "recharge_wallet":"إعادة شحن المحفظة",
+  "wallet_recharge_history":"سجل إعادة شحن المحفظة",
+  "amount":"كمية",
+  "browse_all_venders":"تصفح جميع الباعة",
+  "refund_status":"حالة رد الأموال",
+  "edit_profile":"تعديل الملف الشخصي",
+  "name":"اسم",
+  "phone":"هاتف",
+  "email":"بريد إلكتروني",
+  "new_password":"كلمة المرور الجديدة",
+  "retype_password":"أعد إدخال كلمة السر",
+  "update_password":"تطوير كلمة السر",
+  "update_profile":"تحديث الملف",
+  "password_changes":"تغيير كلمة المرور",
+  "basic_information":"معلومات اساسية",
+  "your_profile_has_been_updated":"تم تحديث ملفك الشخصي",
+  "your_password_has_been_updated":"لقد تم تحديث كلمة السر الخاصة بك",
+  "edit":"يحرر",
+  "delete":"يمسح",
+  "add_location":"أضف الموقع",
+  "address":"عنوان",
+  "country":"دولة",
+  "state":"ولاية",
+  "postal_code":"رمز بريدي",
+  "add":"يضيف",
+  "close":"يغلق",
+  "your_new_address_had_been_added":"تمت إضافة عنوانك الجديد بنجاح!",
+  "all":"الجميع",
+  "paid":"مدفوع",
+  "unpaid":"غير مدفوعة",
+  "confirmed":"مؤكد",
+  "on_delivery":"عند التسليم",
+  "delivered":"تم التوصيل",
+  "order_history":"تاريخ الطلب",
+  "order_details":"تفاصيل الطلب",
+  "do_you_want_to_cancle_this_order?":"هل تريد إلغاء هذا الطلب؟",
+  "please_ensure_us.":"يرجى التأكد منا.",
+  "no":"لا",
+  "yes":"نعم",
+  "order_code":"رمز الطلب",
+  "shipping_method":"طريقة الشحن",
+  "order_date":"تاريخ الطلب",
+  "payment_method":"طريقة الدفع او السداد",
+  "payment_status":"حالة السداد",
+  "delivery_status":"حالة التسليم",
+  "shipping_address":"عنوان الشحن",
+  "total_amount":"المبلغ الإجمالي",
+  "ordered_product":"المنتج المطلوب",
+  "ask_for_refund":"اطلب استرداد الأموال",
+  "sub_total":"المجموع الفرعي",
+  "tax":"ضريبة",
+  "shipping_discount":"خصم الشحن",
+  "discount":"تخفيض",
+  "grand_total":"المجموع الإجمالي",
+  "cancle_order":"الغاء الطلب",
+  "proceed_to_shipping":"انتقل إلى الشحن",
+  "shipping_info":"معلومات الشحن",
+  "continue_to_delivery_info":"تابع إلى معلومات التسليم",
+  "choose_delivery":"اختر التسليم",
+  "carrier":"الناقل",
+  "pickup_point":"نقطة الالتقاط",
+  "checkout":"الدفع",
+  "products":"منتجات",
+  "place_my_order":"ضع طلبي",
+  "your_order_has_been_placed.":"وقد وضعت طلبك",
+  "tracking":"تتبع",
+  "address_details":"تفاصيل العنوان",
+  "city":"مدينة",
+  "log_out":"تسجيل خروج",
+  "in_your_cart":"في سلة التسوق الخاصة بك",
+  "in_your_wishlist":"في قائمة أمنياتك",
+  "your_ordered":"أمرك",
+  "language":"لغة",
+  "currency":"عملة",
+  "user_edit":"المستخدم عيدت",
+  "orders":"طلبات",
+  "refund_requests":"طلبات استرداد الأموال",
+  "messages":"رسائل",
+  "browse_all_vendors":"تصفح جميع البائعين",
+  "followed_vendors":"يتبع البائعين",
+  "inhouse":"في بيت",
+  "message":"رسالة",
+  "password":"كلمة المرور",
+  "login_in_to_techzology_ecommerces":"تسجيل الدخول إلى التكنولوجيا",
+  "or_create_a_new_account":"أو إنشاء حساب جديد",
+  "signup":"اشتراك",
+  "login_with":"تسجيل الدخول مع",
+  "Google":"جوجل",
+  "Facebook":"فيسبوك",
+  "signup_up_to_techzology_ecommerces":"قم بالتسجيل في تكنولوجيا التجارة الإلكترونية",
+  "confirm_pass":"تأكيد كلمة المرور",
+  "i_agree_the":"أوافق على",
+  "terms_and_condition":"الأحكام والشروط،",
+  "return_policy":"سياسة الإرجاع وسياسة الخصوصية",
+  "dont_have_account":"ليس لديك حساب؟",
+  "login":"تسجيل الدخول",
+  "error_pass_short":"كلمة المرور قصيرة جدًا - يجب ألا تقل عن 8 أحرف",
+  "error_pass_enter": "كلمة المرور مطلوبة",
+  "req_email": "البريد الالكتروني مطلوب",
+  "invalid_email": "بريد إلكتروني خاطئ",
+  "req_name": "مطلوب اسم",
+  "req_pass": "كلمة المرور مطلوبة",
+  "miss_match_pass": "لم لا تتطابق مع كلمة المرور",
+  "weak_pass": "كلمة المرور ضعيفة",
+  "verification-otp": "التحقق من OTP",
+  "verfication_desc": "لقد أرسلنا لك رمز OTP عبر البريد الإلكتروني على",
+  "verification_code":"رمز التحقق",
+  "reset_your_password":"اعد ضبط كلمه السر",
+  "resend_code":"أعد إرسال الرمز",
+  "product_you_may_also_like":"منتج قد يعجبك أيضًا",
+  "top_selling_products":"المنتجات الأكثر مبيعا",
+  "video":"فيديو",
+  "reviews":"التعليقات",
+  "vendor_policy":"سياسة البائع",
+  "policy":"سياسة العائدات",
+  "support_policy":"سياسة الدعم"
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+}

@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "596229250158",
+    "project_id": "techzology",
+    "storage_bucket": "techzology.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596229250158:android:dc5b747eebeb1e8c58da7f",
+        "android_client_info": {
+          "package_name": "com.techzology"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596229250158-tcq13ekohmn9cj2gq2g8e9o92isbajpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY-O7BjknovQf3QUQPcxuQQhhPpfDXakY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596229250158-tcq13ekohmn9cj2gq2g8e9o92isbajpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596229250158:android:18b563dcabbd6e3c58da7f",
+        "android_client_info": {
+          "package_name": "com.techzology.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596229250158-tcq13ekohmn9cj2gq2g8e9o92isbajpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY-O7BjknovQf3QUQPcxuQQhhPpfDXakY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596229250158-tcq13ekohmn9cj2gq2g8e9o92isbajpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
