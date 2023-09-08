@@ -10,6 +10,7 @@ import Regular from 'typography/regular-text';
 import {SearchInput} from '../inputs';
 import {Row} from '../row';
 import {colors} from 'config/colors';
+import Medium from 'typography/medium-text';
 const HomeHeader = ({
   style = {},
   title,
@@ -38,13 +39,13 @@ const HomeHeader = ({
             />
           )}
         </TouchableOpacity>
-        {isSearch && (
-          <View style={{width: '75%'}}>
-            <SearchInput
-              onChangeText={onChangeText}
-              placeholder={placeholder}
-            />
-          </View>
+        {title && (
+          <Medium
+            color={colors.iconColor}
+            fontSize={mvs(20)}
+            label={title}
+            style={[styles.title]}
+          />
         )}
         {notification ? (
           <TouchableOpacity onPress={() => navigate('Notifications')}>
@@ -99,4 +100,7 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
   back: {},
+  title: {
+    fontSize: mvs(18),
+  },
 });

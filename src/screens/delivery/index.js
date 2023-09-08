@@ -9,7 +9,7 @@ import {getAllCategories} from 'services/api/auth-api-actions';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 
-const CategoriesTab = props => {
+const DeliveryTab = props => {
   const colors = useTheme().colors;
 
   const [data, setData] = React.useState([]);
@@ -43,4 +43,4 @@ const CategoriesTab = props => {
     </View>
   );
 };
-export default CategoriesTab;
+export default DeliveryTab;

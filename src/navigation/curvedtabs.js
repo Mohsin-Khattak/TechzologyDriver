@@ -4,15 +4,15 @@ import * as SVGS from 'assets/icons/tab-icons/index';
 import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {useAppSelector} from 'hooks/use-store';
-import {Text, TouchableOpacity, View} from 'react-native';
-import CartTab from 'screens/cart';
-import CategoriesTab from 'screens/categories';
+import {TouchableOpacity, View} from 'react-native';
+import DeliveryTab from 'screens/delivery';
 import HomeTab from 'screens/home';
-import MessageTab from 'screens/message';
+
 // import CartScreen from 'screens/cart';
 // import AboutUsScreen from 'screens/categories';
 
 // import ShoppingScreen from 'screens/shopping';
+import MyEarningTab from 'screens/earning';
 import UserTab from 'screens/user-tab';
 
 function MyTabBar({state, descriptors, navigation}) {
@@ -109,10 +109,10 @@ export const TabBar = props => {
       screenOptions={{headerShown: false}}
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Home" component={HomeTab} />
-      <Tab.Screen name="Categories" component={CategoriesTab} />
-      {/* <Tab.Screen name="Message" component={MessageTab} /> */}
-      <Tab.Screen name="Cart" component={CartTab} />
-      {/* {/* <Tab.Screen name="Categories" component={CategoriesTab} /> */}
+      <Tab.Screen name="Delivery" component={DeliveryTab} />
+
+      <Tab.Screen name="MyEarning" component={MyEarningTab} />
+
       <Tab.Screen name="Me" component={UserTab} />
     </Tab.Navigator>
   );

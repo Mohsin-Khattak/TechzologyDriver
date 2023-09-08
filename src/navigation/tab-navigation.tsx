@@ -5,7 +5,7 @@ import * as React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
-import CategoriesTab from 'screens/categories';
+import CategoriesTab from 'screens/delivery';
 import HomeTab from 'screens/home';
 import TabParamList from '../types/navigation-types/bottom-tab';
 import UserTab from 'screens/user-tab';

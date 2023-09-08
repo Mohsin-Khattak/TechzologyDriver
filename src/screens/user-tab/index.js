@@ -41,7 +41,7 @@ const UserTab = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('edit_profile')} />
+      <AppHeader back title={t('Account')} />
       <KeyboardAvoidScrollview
         contentContainerStyle={{paddingBottom: mvs(20), marginTop: mvs(50)}}>
         <ImageBackground

@@ -13,7 +13,7 @@ import Regular from 'typography/regular-text';
 import {PrimaryButton} from 'components/atoms/buttons';
 import {useTheme} from '@react-navigation/native';
 
-const CartTab = props => {
+const MyEarningTab = props => {
   const {t} = i18n;
   const colors = useTheme().colors;
 
@@ -69,4 +69,4 @@ const CartTab = props => {
     </View>
   );
 };
-export default CartTab;
+export default MyEarningTab;
