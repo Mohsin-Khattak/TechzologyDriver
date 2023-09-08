@@ -10,6 +10,8 @@ import {useTheme} from '@react-navigation/native';
 import DrawerNavigator from './drawer-navigation';
 import OrderDetails from 'screens/order-details';
 import Collection from 'screens/collections';
+import PendingDelivery from 'screens/pending-delivery';
+import Tracking from 'screens/tracking';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +35,8 @@ export const RootNavigator = () => {
           <Stack.Screen name="Drawer" component={DrawerNavigator} />
           <Stack.Screen name="OrderDetails" component={OrderDetails} />
           <Stack.Screen name="Collection" component={Collection} />
+          <Stack.Screen name="PendingDelivery" component={PendingDelivery} />
+          <Stack.Screen name="Tracking" component={Tracking} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

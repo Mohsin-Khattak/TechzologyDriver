@@ -8,3 +8,4 @@ export {default as PickUp} from './pick.svg';
 export {default as HomeWork} from './homework.svg';
 export {default as ViewDetails} from './viewdetails.svg';
 export {default as Read} from './read.svg';
+export {default as AppLocation} from './location.svg';

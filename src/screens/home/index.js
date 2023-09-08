@@ -35,11 +35,13 @@ const HomeTab = props => {
           <Regular style={styles.text} label={t('completed_delivery')} />
           <Bold style={styles.text} label={'15'} />
         </TouchableOpacity>
-        <View style={styles.pendingContainer}>
+        <TouchableOpacity
+          onPress={() => navigate('PendingDelivery')}
+          style={styles.pendingContainer}>
           <PendingDelivery />
           <Regular style={styles.text} label={t('pending_delivery')} />
           <Bold style={styles.text} label={'200'} />
-        </View>
+        </TouchableOpacity>
       </Row>
       <Row style={styles.boxContainer}>
         <TouchableOpacity
@@ -67,7 +69,7 @@ const HomeTab = props => {
           <Regular label={'05'} />
         </Row>
         <Row style={{marginTop: mvs(20)}}>
-          <View style={{alignItems: 'center'}}>
+          <TouchableOpacity style={{alignItems: 'center'}}>
             <View style={styles.circle}>
               <Delivery />
             </View>
@@ -76,8 +78,8 @@ const HomeTab = props => {
               fontSize={mvs(12)}
               label={'on_the_way (16)'}
             />
-          </View>
-          <View style={{alignItems: 'center'}}>
+          </TouchableOpacity>
+          <TouchableOpacity style={{alignItems: 'center'}}>
             <View style={styles.circle}>
               <PickUp />
             </View>
@@ -86,8 +88,8 @@ const HomeTab = props => {
               fontSize={mvs(12)}
               label={'picked (47)'}
             />
-          </View>
-          <View style={{alignItems: 'center'}}>
+          </TouchableOpacity>
+          <TouchableOpacity style={{alignItems: 'center'}}>
             <View style={styles.circle}>
               <HomeWork />
             </View>
@@ -96,7 +98,7 @@ const HomeTab = props => {
               fontSize={mvs(12)}
               label={'Assigned (20)'}
             />
-          </View>
+          </TouchableOpacity>
         </Row>
       </View>
     </View>
