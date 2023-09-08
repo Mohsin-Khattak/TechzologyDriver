@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   idContainer: {
-    width: '10%',
+    width: '3%',
     backgroundColor: colors.primary,
     borderTopLeftRadius: mvs(10),
     borderBottomLeftRadius: mvs(10),

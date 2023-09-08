@@ -4,19 +4,18 @@ import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {View} from 'react-native';
 
 import {useTheme} from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
 
-import Bold from 'typography/bold-text';
-import Medium from 'typography/medium-text';
-import Regular from 'typography/regular-text';
-import styles from './styles';
 import {Earnings} from 'assets/icons/app-icons';
 import EarningCard from 'components/molecules/earning-card';
+import Bold from 'typography/bold-text';
+import Regular from 'typography/regular-text';
+import styles from './styles';
 
-const MyEarningTab = props => {
+const Collection = props => {
   const colors = useTheme().colors;
 
   const featuredCategories = [
@@ -46,7 +45,7 @@ const MyEarningTab = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('Earnings')} />
+      <AppHeader back title={t('Collection')} />
       <Row style={{paddingHorizontal: mvs(20), marginTop: mvs(20)}}>
         <Row style={styles.balanceContainer}>
           <View>
@@ -106,4 +105,4 @@ const MyEarningTab = props => {
     </View>
   );
 };
-export default MyEarningTab;
+export default Collection;

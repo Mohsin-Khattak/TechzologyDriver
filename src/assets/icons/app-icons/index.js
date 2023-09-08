@@ -6,3 +6,5 @@ export {default as Cancle} from './cancel.svg';
 export {default as Delivery} from './delivery.svg';
 export {default as PickUp} from './pick.svg';
 export {default as HomeWork} from './homework.svg';
+export {default as ViewDetails} from './viewdetails.svg';
+export {default as Read} from './read.svg';

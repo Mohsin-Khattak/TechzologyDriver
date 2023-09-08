@@ -8,6 +8,8 @@ import Splash from 'screens/splash';
 import {horizontalAnimation} from '../utils';
 import {useTheme} from '@react-navigation/native';
 import DrawerNavigator from './drawer-navigation';
+import OrderDetails from 'screens/order-details';
+import Collection from 'screens/collections';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,12 +25,14 @@ export const RootNavigator = () => {
         barStyle={dark ? 'light-content' : 'dark-content'}
       />
       <Stack.Navigator
-        initialRouteName="Splash"
+        initialRouteName="Drawer"
         screenOptions={horizontalAnimation}>
         <Stack.Group>
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Drawer" component={DrawerNavigator} />
+          <Stack.Screen name="OrderDetails" component={OrderDetails} />
+          <Stack.Screen name="Collection" component={Collection} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

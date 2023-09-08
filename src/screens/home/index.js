@@ -3,13 +3,14 @@ import HomeHeader from 'components/atoms/headers/home-header';
 import {Row} from 'components/atoms/row';
 import {mvs} from 'config/metrices';
 import React from 'react';
-import {View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import styles from './styles';
 import {
   Cancle,
   CompletedDelivery,
   Delivery,
   Earnings,
+  HomeWork,
   PendingDelivery,
   PickUp,
   TotalCollected,
@@ -17,6 +18,7 @@ import {
 import Regular from 'typography/regular-text';
 import {t} from 'i18next';
 import Bold from 'typography/bold-text';
+import {navigate} from 'navigation/navigation-ref';
 
 const HomeTab = props => {
   const colors = useTheme().colors;
@@ -26,11 +28,13 @@ const HomeTab = props => {
       <HomeHeader menu title={'Dashboard'} />
 
       <Row style={{paddingHorizontal: mvs(20)}}>
-        <View style={styles.compeleteContainer}>
+        <TouchableOpacity
+          onPress={() => navigate('Delivery')}
+          style={styles.compeleteContainer}>
           <CompletedDelivery />
           <Regular style={styles.text} label={t('completed_delivery')} />
           <Bold style={styles.text} label={'15'} />
-        </View>
+        </TouchableOpacity>
         <View style={styles.pendingContainer}>
           <PendingDelivery />
           <Regular style={styles.text} label={t('pending_delivery')} />
@@ -38,16 +42,20 @@ const HomeTab = props => {
         </View>
       </Row>
       <Row style={styles.boxContainer}>
-        <View style={styles.pendingContainer}>
+        <TouchableOpacity
+          onPress={() => navigate('Collection')}
+          style={styles.pendingContainer}>
           <TotalCollected />
           <Regular style={styles.text} label={t('total_collected')} />
           <Bold style={styles.text} label={'$500.00'} />
-        </View>
-        <View style={styles.compeleteContainer}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigate('MyEarning')}
+          style={styles.compeleteContainer}>
           <Earnings />
           <Regular style={styles.text} label={t('Earnings')} />
           <Bold style={styles.text} label={'$80.00'} />
-        </View>
+        </TouchableOpacity>
       </Row>
       <View style={styles.bottomContainer}>
         <Row style={styles.cancelledContainer}>
@@ -81,7 +89,7 @@ const HomeTab = props => {
           </View>
           <View style={{alignItems: 'center'}}>
             <View style={styles.circle}>
-              <Delivery />
+              <HomeWork />
             </View>
             <Regular
               color={colors.white}

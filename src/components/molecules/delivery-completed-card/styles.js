@@ -6,19 +6,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     width: '100%',
-    height: mvs(90),
+    paddingVertical: mvs(6),
     marginTop: mvs(20),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
 
-    elevation: 2,
     borderRadius: mvs(10),
     justifyContent: 'flex-start',
+    borderLeftWidth: mvs(10),
+    borderLeftColor: colors.primary,
   },
   idContainer: {
     width: '3%',
@@ -30,9 +24,24 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginLeft: mvs(15),
-    width: '65%',
+
     justifyContent: 'center',
   },
   priceContainer: {alignItems: 'center', justifyContent: 'center', flex: 1},
+  viewDetailsBtn: {
+    width: '45%',
+    backgroundColor: colors.white,
+    borderWidth: mvs(1),
+    borderColor: colors.primary,
+    height: mvs(40),
+  },
+  cross: {
+    width: mvs(20),
+    height: mvs(20),
+    borderRadius: mvs(10),
+    backgroundColor: colors.red,
+    marginLeft: mvs(20),
+    alignItems: 'center',
+  },
 });
 export default styles;
