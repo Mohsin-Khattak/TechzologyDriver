@@ -13,8 +13,14 @@ import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import {Delivery} from 'assets/icons';
 import DeliveryPendingCard from 'components/molecules/delivery-pending-card';
+import DeliveredModal from 'components/molecules/modals/delivered-modal';
 
 const PendingDelivery = props => {
+  const {picked, assign} = props?.route?.params || {};
+  const [deliveredModal, setDeliveredModal] = React.useState(false);
+
+  console.log('status check===>', picked);
+  console.log('status check===>', assign);
   const colors = useTheme().colors;
 
   const featuredCategories = [
@@ -57,36 +63,55 @@ const PendingDelivery = props => {
 
   const renderCompletedDelivery = ({item, index}) => (
     <DeliveryPendingCard
+      setDeliveredModal={setDeliveredModal}
       item={item}
       onPressDirection={() => navigate('Tracking')}
       onPress={() =>
-        navigate('OrderDetails', {
-          status: '3',
-        })
+        navigate(
+          'OrderDetails',
+          assign
+            ? {
+                status: '1',
+              }
+            : picked
+            ? {
+                status: '2',
+              }
+            : {
+                status: '3',
+              },
+        )
       }
     />
   );
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('Completed Delivery')} />
+      <AppHeader back title={t('Pending Delivery')} />
       <Row style={{paddingHorizontal: mvs(20), justifyContent: 'flex-start'}}>
-        <View
-          style={{
-            width: mvs(20),
-            height: mvs(20),
-            backgroundColor: colors.skyBlue,
-            borderRadius: mvs(10),
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+        <View style={styles.deliveryView}>
           <Delivery />
         </View>
-        <Regular
-          fontSize={mvs(12)}
-          style={{marginLeft: mvs(10)}}
-          label={'On The Way (16)'}
-        />
+
+        {assign ? (
+          <Regular
+            fontSize={mvs(12)}
+            style={{marginLeft: mvs(10)}}
+            label={'Assigned (20)'}
+          />
+        ) : picked ? (
+          <Regular
+            fontSize={mvs(12)}
+            style={{marginLeft: mvs(10)}}
+            label={'Picked (47)'}
+          />
+        ) : (
+          <Regular
+            fontSize={mvs(12)}
+            style={{marginLeft: mvs(10)}}
+            label={'On The Way (16)'}
+          />
+        )}
       </Row>
 
       <CustomFlatList
@@ -97,6 +122,10 @@ const PendingDelivery = props => {
           paddingBottom: mvs(20),
           paddingHorizontal: mvs(20),
         }}
+      />
+      <DeliveredModal
+        onClose={() => setDeliveredModal(false)}
+        visible={deliveredModal}
       />
     </View>
   );

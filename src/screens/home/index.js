@@ -69,7 +69,9 @@ const HomeTab = props => {
           <Regular label={'05'} />
         </Row>
         <Row style={{marginTop: mvs(20)}}>
-          <TouchableOpacity style={{alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={() => navigate('PendingDelivery')}
+            style={{alignItems: 'center'}}>
             <View style={styles.circle}>
               <Delivery />
             </View>
@@ -79,7 +81,9 @@ const HomeTab = props => {
               label={'on_the_way (16)'}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={{alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={() => navigate('PendingDelivery', {picked: 'picked'})}
+            style={{alignItems: 'center'}}>
             <View style={styles.circle}>
               <PickUp />
             </View>
@@ -89,7 +93,9 @@ const HomeTab = props => {
               label={'picked (47)'}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={{alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={() => navigate('PendingDelivery', {assign: 'assign'})}
+            style={{alignItems: 'center'}}>
             <View style={styles.circle}>
               <HomeWork />
             </View>

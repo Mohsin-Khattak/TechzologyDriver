@@ -81,5 +81,13 @@ const styles = StyleSheet.create({
     flex: 1,
     left: mvs(29),
   },
+  deliveryView: {
+    width: mvs(20),
+    height: mvs(20),
+    backgroundColor: colors.skyBlue,
+    borderRadius: mvs(10),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 export default styles;

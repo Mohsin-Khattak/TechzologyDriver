@@ -197,7 +197,7 @@ const Tracking = props => {
                         </View>
                       </Row>
                     </Row>
-                    <Row style={{alignItems: 'flex-end'}}>
+                    <Row style={{alignItems: 'flex-end', marginTop: mvs(20)}}>
                       <View style={styles.circleOne} />
                       <Row
                         style={{

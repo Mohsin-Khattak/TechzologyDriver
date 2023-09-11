@@ -25,6 +25,7 @@ import CustomMap from 'components/atoms/custom-map';
 import MapDirections from 'components/atoms/custom-map-direction';
 import {navigate} from 'navigation/navigation-ref';
 import {useTheme} from '@react-navigation/native';
+import DeliveredModal from 'components/molecules/modals/delivered-modal';
 
 const OrderDetails = props => {
   const colors = useTheme().colors;
@@ -34,6 +35,7 @@ const OrderDetails = props => {
   const data = order;
   const [orderConformationModal, setOrderConfirmationModal] =
     React.useState(false);
+  const [deliveredModal, setDeliveredModal] = React.useState(false);
   const origin = {latitude: 31.560249, longitude: 74.362284};
   const destination = {latitude: 31.556014, longitude: 74.354795};
   return (
@@ -299,19 +301,12 @@ const OrderDetails = props => {
                   />
                   <Regular fontSize={mvs(12)} label={'$120.000'} />
                 </Row>
-                <Row style={{marginTop: mvs(5)}}>
-                  <Regular
-                    color={colors.text}
-                    fontSize={mvs(12)}
-                    label={'2 x item'}
-                  />
-                  <TouchableOpacity>
-                    <Row>
-                      <Regular fontSize={mvs(12)} label={t('ask_for_refund')} />
-                      <RefundTwo />
-                    </Row>
-                  </TouchableOpacity>
-                </Row>
+
+                <Regular
+                  color={colors.text}
+                  fontSize={mvs(12)}
+                  label={'2 x item'}
+                />
               </View>
             </Row>
             <View
@@ -361,15 +356,35 @@ const OrderDetails = props => {
                 <Regular fontSize={mvs(12)} label={'$1300.00'} />
               </Row>
             </View>
-            <PrimaryButton
-              onPress={() => {
-                status === '3'
-                  ? navigate('Tracking')
-                  : setOrderConfirmationModal(true);
-              }}
-              containerStyle={{marginTop: mvs(25)}}
-              title={t(status === '3' ? 'tracking' : 'cancle_order')}
-            />
+            <View
+              style={{
+                padding: mvs(20),
+                backgroundColor: colors.skyBlue,
+                marginVertical: mvs(15),
+                borderRadius: mvs(15),
+              }}>
+              <Row>
+                <Regular label={'Amount To Collect'} />
+                <Regular label={'$130.00'} />
+              </Row>
+            </View>
+            <Row
+              style={{
+                backgroundColor: colors.skyBlue,
+                borderRadius: mvs(15),
+              }}>
+              <PrimaryButton
+                onPress={() => setOrderConfirmationModal(true)}
+                containerStyle={{width: '45%'}}
+                title={'Cancle'}
+              />
+              <PrimaryButton
+                onPress={() => setDeliveredModal(true)}
+                textStyle={{color: colors.primary}}
+                containerStyle={{backgroundColor: colors.skyBlue, width: '55%'}}
+                title={'Mark As Delivered'}
+              />
+            </Row>
           </>
         )}
       </KeyboardAvoidScrollview>
@@ -377,6 +392,10 @@ const OrderDetails = props => {
       <OrderConfirmationModal
         onClose={() => setOrderConfirmationModal(false)}
         visible={orderConformationModal}
+      />
+      <DeliveredModal
+        onClose={() => setDeliveredModal(false)}
+        visible={deliveredModal}
       />
     </View>
   );

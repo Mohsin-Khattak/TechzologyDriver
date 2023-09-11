@@ -1,6 +1,11 @@
 import {useTheme} from '@react-navigation/native';
 import {TickTwo} from 'assets/icons';
-import {AppLocation, Read, ViewDetails} from 'assets/icons/app-icons';
+import {
+  AppLocation,
+  CircleMark,
+  Read,
+  ViewDetails,
+} from 'assets/icons/app-icons';
 import {IconButton} from 'components/atoms/buttons';
 import {Row} from 'components/atoms/row';
 import {mvs} from 'config/metrices';
@@ -16,6 +21,7 @@ const DeliveryPendingCard = ({
   onPress,
   loading,
   onPressDirection,
+  setDeliveredModal,
 }) => {
   const colors = useTheme().colors;
 
@@ -83,15 +89,20 @@ const DeliveryPendingCard = ({
             <IconButton
               containerStyle={styles.viewDetailsBtn}
               Icon={<ViewDetails />}
-              textStyle={{color: colors.primary, marginLeft: mvs(5)}}
+              textStyle={{
+                color: colors.primary,
+                marginLeft: mvs(5),
+                fontSize: mvs(12),
+              }}
               title="View Details"
               onPress={onPress}
             />
             <IconButton
-              Icon={<Read />}
-              title={'Delivered'}
-              textStyle={{marginLeft: mvs(5)}}
-              containerStyle={{width: '45%', height: mvs(40)}}
+              onPress={() => setDeliveredModal(true)}
+              Icon={<CircleMark />}
+              title={'Mark As Delivered'}
+              textStyle={{marginLeft: mvs(5), fontSize: mvs(12)}}
+              containerStyle={{width: '50%', height: mvs(40)}}
             />
           </Row>
         </View>

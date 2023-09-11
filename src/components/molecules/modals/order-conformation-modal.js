@@ -37,17 +37,16 @@ const OrderConfirmationModal = ({
       visible={visible}
       style={{...styles.contentContainerStyle, style}}>
       <View style={{...styles.container, backgroundColor: colors.downColor}}>
-        <Bold color={colors.text} label={t('please_ensure_us.')} />
         <Medium
           color={colors.text}
           fontSize={mvs(12)}
-          label={t('do_you_want_to_cancle_this_order?')}
+          label={t('Are You Sure To Request Cancellation')}
         />
         <View style={styles.otp}>
           <Row>
             <PrimaryButton
               onPress={() => onClose()}
-              title={t('no')}
+              title={t('close')}
               containerStyle={{
                 marginTop: mvs(20),
                 width: '40%',
@@ -55,7 +54,7 @@ const OrderConfirmationModal = ({
               }}
             />
             <PrimaryButton
-              title={t('yes')}
+              title={t('confirm')}
               containerStyle={{
                 marginTop: mvs(20),
                 width: '40%',

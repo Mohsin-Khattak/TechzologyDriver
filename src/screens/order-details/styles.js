@@ -33,15 +33,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     width: '100%',
     marginTop: mvs(20),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
 
-    elevation: 2,
     backgroundColor: colors.white,
     paddingHorizontal: mvs(15),
     paddingVertical: mvs(15),

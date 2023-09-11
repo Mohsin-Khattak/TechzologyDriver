@@ -9,3 +9,4 @@ export {default as HomeWork} from './homework.svg';
 export {default as ViewDetails} from './viewdetails.svg';
 export {default as Read} from './read.svg';
 export {default as AppLocation} from './location.svg';
+export {default as CircleMark} from './circlemark.svg';

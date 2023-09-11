@@ -12,8 +12,11 @@ import {PrimaryButton} from 'components/atoms/buttons';
 import {UTILS} from 'utils';
 import {CrossModal} from 'assets/icons';
 import {Row} from 'components/atoms/row';
+import Regular from 'typography/regular-text';
+import Bold from 'typography/bold-text';
+import Medium from 'typography/medium-text';
 import {useTheme} from '@react-navigation/native';
-const WalletAmount = ({
+const DeliveredModal = ({
   style,
   email,
   visible = false,
@@ -32,21 +35,18 @@ const WalletAmount = ({
       onBackdropPress={() => onClose()}
       onBackButtonPress={() => onClose()}
       visible={visible}
-      style={[styles.contentContainerStyle, style]}>
+      style={{...styles.contentContainerStyle, style}}>
       <View style={{...styles.container, backgroundColor: colors.downColor}}>
+        <Medium
+          color={colors.text}
+          fontSize={mvs(12)}
+          label={t('Are You Sure To Mark This As Delivered ?')}
+        />
         <View style={styles.otp}>
-          <PrimaryInput
-            keyboardType={'number-pad'}
-            editable={!userInfo?.transaction_id}
-            value={`${value}`}
-            placeholder={t('amount')}
-            onChangeText={setValue}
-            // onBlur={() => setFieldTouched('email', true)}
-          />
           <Row>
             <PrimaryButton
               onPress={() => onClose()}
-              title={t('Close')}
+              title={t('close')}
               containerStyle={{
                 marginTop: mvs(20),
                 width: '40%',
@@ -54,11 +54,7 @@ const WalletAmount = ({
               }}
             />
             <PrimaryButton
-              onPress={() => {
-                navigate('RechargeWallet');
-                onClose();
-              }}
-              title={t('proceed')}
+              title={t('confirm')}
               containerStyle={{
                 marginTop: mvs(20),
                 width: '40%',
@@ -71,7 +67,7 @@ const WalletAmount = ({
     </ModalWrapper>
   );
 };
-export default WalletAmount;
+export default DeliveredModal;
 const styles = StyleSheet.create({
   contentContainerStyle: {
     width: '100%',
@@ -84,10 +80,11 @@ const styles = StyleSheet.create({
   container: {
     // height: mvs(300),
     backgroundColor: colors.white,
-    paddingVertical: mvs(20),
+    padding: mvs(20),
     borderRadius: mvs(20),
+    alignItems: 'center',
   },
-  otp: {paddingHorizontal: mvs(20), marginTop: mvs(20)},
+
   header: {
     height: mvs(3),
     borderRadius: mvs(5),
