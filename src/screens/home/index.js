@@ -19,9 +19,28 @@ import Regular from 'typography/regular-text';
 import {t} from 'i18next';
 import Bold from 'typography/bold-text';
 import {navigate} from 'navigation/navigation-ref';
+import {UTILS} from 'utils';
+import {getDashBoard} from 'services/api/auth-api-actions';
+import {useAppSelector} from 'hooks/use-store';
 
 const HomeTab = props => {
+  const user = useAppSelector(s => s);
+  const userId = user?.user?.userInfo?.user?.id;
+
   const colors = useTheme().colors;
+  const [data, getData] = React.useState({});
+
+  const fetchData = async () => {
+    try {
+      const res = await getDashBoard(userId);
+      getData(res);
+    } catch (error) {
+      console.log('error=====>', UTILS.returnError());
+    }
+  };
+  React.useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
@@ -33,14 +52,14 @@ const HomeTab = props => {
           style={styles.compeleteContainer}>
           <CompletedDelivery />
           <Regular style={styles.text} label={t('completed_delivery')} />
-          <Bold style={styles.text} label={'15'} />
+          <Bold style={styles.text} label={data?.completed_delivery} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigate('PendingDelivery')}
           style={styles.pendingContainer}>
           <PendingDelivery />
           <Regular style={styles.text} label={t('pending_delivery')} />
-          <Bold style={styles.text} label={'200'} />
+          <Bold style={styles.text} label={data?.pending_delivery} />
         </TouchableOpacity>
       </Row>
       <Row style={styles.boxContainer}>
@@ -49,14 +68,14 @@ const HomeTab = props => {
           style={styles.pendingContainer}>
           <TotalCollected />
           <Regular style={styles.text} label={t('total_collected')} />
-          <Bold style={styles.text} label={'$500.00'} />
+          <Bold style={styles.text} label={data?.total_collection} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigate('MyEarning')}
           style={styles.compeleteContainer}>
           <Earnings />
           <Regular style={styles.text} label={t('Earnings')} />
-          <Bold style={styles.text} label={'$80.00'} />
+          <Bold style={styles.text} label={data?.total_earning} />
         </TouchableOpacity>
       </Row>
       <View style={styles.bottomContainer}>
@@ -66,7 +85,7 @@ const HomeTab = props => {
             style={{marginLeft: mvs(20), flex: 1}}
             label={'cancelled_delivery'}
           />
-          <Regular label={'05'} />
+          <Regular label={data?.cancelled} />
         </Row>
         <Row style={{marginTop: mvs(20)}}>
           <TouchableOpacity
@@ -78,7 +97,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={'on_the_way (16)'}
+              label={`${'on_the_way '}${'('}${data?.on_the_way}${')'} `}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -90,7 +109,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={'picked (47)'}
+              label={`${'picked '}${'('}${data?.picked}${')'} `}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -102,7 +121,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={'Assigned (20)'}
+              label={`${'assigned '}${'('}${data?.assigned}${')'} `}
             />
           </TouchableOpacity>
         </Row>

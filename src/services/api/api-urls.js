@@ -24,4 +24,9 @@ export const URLS = {
     delete_address: 'v2/user/shipping/delete/',
     get_cities: 'v2/cities',
   },
+  dashboard: {
+    get_dashboard: 'v2/delivery-boy/dashboard-summary/',
+    get_collection: 'v2/delivery-boy/collection-summary/',
+    get_collection_history: 'v2/delivery-boy/collection/?page=',
+  },
 };

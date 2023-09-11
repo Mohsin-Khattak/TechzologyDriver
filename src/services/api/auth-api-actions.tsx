@@ -45,52 +45,24 @@ export const forgotPassword = (values: any) => postData(URLS.auth.forget_passwor
 export const resendPasswordCode = (values: any) => postData(URLS.auth.resend_password_code, values);
 export const changePassword = (values: any) => postData(URLS.auth.change_password, values);
 export const logout = () => getData(URLS.auth.logout);
-export const banners = () => getData(URLS.app.get_banners);
-export const getFeaturedCategories = () => getData(URLS.app.get_featured_categories);
-export const getAllFeaturedProducts = () => getData(URLS.app.get_all_featured_products);
-export const getAllProducts = (pageNumber: any) => {
-  let url = `${URLS.app.get_all_products}?page=${pageNumber}`;
+
+
+
+//////////get dashboard/////////////////
+export const getDashBoard = (userId: any) => getData(`${URLS.dashboard.get_dashboard}${userId}`)
+export const getCollection = (userId: any) => getData(`${URLS.dashboard.get_collection}${userId}`)
+// export const getCollectionHistory = (userId: any) => getData(`${URLS.dashboard.get_collection_history}${userId}`)
+export const getCollectionHistory = (userId: any, pageNumber: any) => {
+  let url = `${URLS.dashboard.get_collection_history}${userId}?page=${pageNumber}`;
   return getData(url);
 };
-export const getProductDetails = (productId: any) => getData(`${URLS.app.get_product_details}${productId}`
-)
-export const getAllCategories = () => getData(URLS.categories.get_all_categories);
-export const getAllFeaturedCategories = () => getData(URLS.categories.get_all_categories_featured)
-
-//////////add addresss/////////////////
-export const getAddress = (userId: any) => getData(`${URLS.address.get_address}${userId}`)
-export const deleteAddress = (addressId: any) => getData(`${URLS.address.delete_address}${addressId}`)
-export const addAddress = (newAddress: any) => postData(`${URLS.address.add_address, newAddress}`)
-export const getCities = () => getData(URLS.address.get_cities)
-export const getAllProductCategoryPaginated = (categoryId: any, pageNumber: any,) => {
-  let url = `${URLS.categories.get_all_products_of_category_paginated}${categoryId}?page=${pageNumber}&name=`;
-  return getData(url);
-};
-
 
 
 
 //// add amount///
-export const onAddAmount = (values: any) => {
-  return postData(URLS.wallet.add_amount, values);
-};
+
 /// Wallet ///
-export const getWallet = (values: any, setLoading: (bool: boolean) => void) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    try {
-      setLoading(true);
-      const res = await postData(URLS.wallet.get_wallet, values);
 
-      dispatch(setWallet(res || {}));
-
-    } catch (error: any) {
-      console.log('error in wallet', UTILS.returnError(error));
-      Alert.alert('', UTILS.returnError(error));
-    } finally {
-      setLoading(false);
-    }
-  };
-};
 export const getLocations = () => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
