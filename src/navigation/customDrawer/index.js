@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ImageBackground, View} from 'react-native';
+import {Alert, ImageBackground, View} from 'react-native';
 import styles from './styles';
 
 import {useTheme} from '@react-navigation/native';
@@ -16,9 +16,12 @@ import {IconButton} from 'components/atoms/buttons';
 import {mvs} from 'config/metrices';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {t} from 'i18next';
-import {navigate} from 'navigation/navigation-ref';
+import {navigate, resetStack} from 'navigation/navigation-ref';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
+import {LogOut} from 'assets/icons/app-icons';
+import {logout} from 'services/api/auth-api-actions';
+import {UTILS} from 'utils';
 
 const CustomDrawer = props => {
   const colors = useTheme().colors;
@@ -26,6 +29,20 @@ const CustomDrawer = props => {
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(s => s);
   const user = userInfo?.user?.userInfo?.user;
+
+  const logOut = async () => {
+    try {
+      setLoading(true);
+      const res = await logout();
+      Alert.alert(res?.message);
+      await UTILS.clearStorage();
+      resetStack('Login');
+    } catch (error) {
+      console.log('Error===>', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const {navigation} = props;
   return (
@@ -108,6 +125,14 @@ const CustomDrawer = props => {
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
           Icon={<Shop />}
+        />
+
+        <IconButton
+          onPress={() => logout()}
+          title={t('Logout')}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
+          Icon={<LogOut />}
         />
       </View>
     </View>

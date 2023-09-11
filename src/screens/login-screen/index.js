@@ -30,14 +30,14 @@ const LoginScreen = props => {
   const initialValues = {
     email: '',
     password: '',
+    user_type: 'delivery_boy',
   };
   const [loading, setLoading] = React.useState(false);
 
   const onSubmit = async values => {
     try {
       setLoading(true);
-      // await dispatch(onLogin(values, setLoading, props));
-      navigate('Drawer');
+      await dispatch(onLogin(values, setLoading, props));
     } catch (error) {
       console.log('error=>', UTILS.returnError(error));
     } finally {
