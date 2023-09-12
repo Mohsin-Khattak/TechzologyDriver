@@ -12,6 +12,7 @@ import {IconButton} from 'components/atoms/buttons';
 import {Read, ViewDetails} from 'assets/icons/app-icons';
 
 const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
+  console.log('item me check=======>', item);
   const colors = useTheme().colors;
 
   return (
@@ -23,7 +24,7 @@ const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
         }}>
         <View style={styles.contentContainer}>
           <Regular label={'Order Code'} />
-          <Regular style={{marginTop: mvs(5)}} label={item?.id} />
+          <Regular style={{marginTop: mvs(5)}} label={item?.code} />
           <Row style={{alignItems: 'center'}}>
             <Regular
               style={{
@@ -37,7 +38,7 @@ const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
             <Medium
               style={{marginTop: mvs(5)}}
               fontSize={mvs(12)}
-              label={'$12.150'}
+              label={item?.grand_total}
             />
           </Row>
 

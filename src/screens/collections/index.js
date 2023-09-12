@@ -24,8 +24,8 @@ import CollectionCard from 'components/molecules/collection-card';
 
 const Collection = props => {
   const colors = useTheme().colors;
-  const user = useAppSelector(s => s);
-  const userId = user?.user?.userInfo?.user?.id;
+  const {userInfo} = useAppSelector(s => s?.user);
+  const userId = userInfo?.id;
 
   const [data, getData] = React.useState({});
   const [history, getHistory] = React.useState([]);
@@ -50,7 +50,6 @@ const Collection = props => {
       setLoading(true);
       setDataLoading(true);
       const res = await getCollectionHistory(userId, pageNumber);
-      console.log('fetch history response check=======>', res);
       getHistory(preProducts =>
         pageNumber > 1
           ? {

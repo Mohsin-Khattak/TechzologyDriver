@@ -24,9 +24,9 @@ import {getDashBoard} from 'services/api/auth-api-actions';
 import {useAppSelector} from 'hooks/use-store';
 
 const HomeTab = props => {
-  const user = useAppSelector(s => s);
-  const userId = user?.user?.userInfo?.user?.id;
-  console.log('user id chck==========>', userId);
+  const {userInfo} = useAppSelector(s => s?.user);
+  const userId = userInfo?.id;
+  console.log('user id check=========>', userId);
 
   const colors = useTheme().colors;
   const [data, getData] = React.useState({});

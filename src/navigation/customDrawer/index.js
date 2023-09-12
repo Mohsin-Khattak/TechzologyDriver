@@ -27,8 +27,8 @@ const CustomDrawer = props => {
   const colors = useTheme().colors;
   const [loading, setLoading] = React.useState(false);
   const dispatch = useAppDispatch();
-  const userInfo = useAppSelector(s => s);
-  const user = userInfo?.user?.userInfo?.user;
+  const {userInfo} = useAppSelector(s => s?.user);
+  const user = userInfo;
 
   const logOut = async () => {
     try {
@@ -65,15 +65,11 @@ const CustomDrawer = props => {
         {/* <Image source={{uri: user?.profileImage}} style={styles.userImage} /> */}
       </ImageBackground>
 
-      <Bold
-        color={colors.text}
-        label={'Mohsin Khattak'}
-        style={styles.userName}
-      />
+      <Bold color={colors.text} label={user?.name} style={styles.userName} />
       <Regular
         color={colors.text}
         style={{alignSelf: 'center'}}
-        label={'mohsinkhattak095@gmail.com'}
+        label={user?.email}
       />
       <View style={styles.line} />
       <View style={styles.innerContainer}>

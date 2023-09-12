@@ -15,11 +15,7 @@ import Regular from 'typography/regular-text';
 import styles from './styles';
 import {Earnings} from 'assets/icons/app-icons';
 import EarningCard from 'components/molecules/earning-card';
-import {
-  getCollection,
-  getCollectionHistory,
-  getEarning,
-} from 'services/api/auth-api-actions';
+import {getCollectionHistory, getEarning} from 'services/api/auth-api-actions';
 import {UTILS} from 'utils';
 import {Alert} from 'react-native';
 import {useAppSelector} from 'hooks/use-store';
@@ -27,9 +23,8 @@ import {Loader} from 'components/atoms/loader';
 
 const MyEarningTab = props => {
   const colors = useTheme().colors;
-
-  const user = useAppSelector(s => s);
-  const userId = user?.user?.userInfo?.user?.id;
+  const {userInfo} = useAppSelector(s => s?.user);
+  const userId = userInfo?.id;
 
   const [data, getData] = React.useState({});
   const [history, getHistory] = React.useState([]);

@@ -52,12 +52,17 @@ export const getDashBoard = (userId: any) => getData(`${URLS.dashboard.get_dashb
 export const getCollection = (userId: any) => getData(`${URLS.dashboard.get_collection}${userId}`)
 export const getEarning = (userId: any) => getData(`${URLS.dashboard.get_earning}${userId}`)
 
+
 export const getCollectionHistory = (userId: any, pageNumber: any) => {
   let url = `${URLS.dashboard.get_collection_history}${userId}?page=${pageNumber}`;
   return getData(url);
 };
+export const getCompletedDelivery = (userId: any, dateRange: any, paymentType: any, pageNumber: any) => {
+  let url = `${URLS.dashboard.get_completed_delivery}${userId}?date_range=${dateRange}&payment_type=${paymentType}&page=${pageNumber}`;
+  return getData(url);
+};
 
-
+//export const getCompletedDelivery = (userId: any, dateRange: any, paymentType: any, pageNumber: any) => getData(`${URLS.dashboard.get_completed_delivery}${userId}?date_range=${dateRange}&payment_type=${paymentType}&page=${pageNumber}`)
 
 //// add amount///
 

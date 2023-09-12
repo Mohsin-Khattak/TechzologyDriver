@@ -21,9 +21,12 @@ import {UTILS} from 'utils';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import Bold from 'typography/bold-text';
+import {useAppSelector} from 'hooks/use-store';
 
 const UserTab = props => {
   const colors = useTheme().colors;
+  const {userInfo} = useAppSelector(s => s?.user);
+  const user = userInfo;
 
   const [image, setImage] = React.useState();
   const [updatedModal, setUpdatedModal] = React.useState(false);
@@ -61,16 +64,8 @@ const UserTab = props => {
           </TouchableOpacity>
         </ImageBackground>
 
-        <Medium
-          color={colors.text}
-          style={styles.name}
-          label={'Paul K. Jensen'}
-        />
-        <Regular
-          color={colors.text}
-          style={styles.email}
-          label={'customer1@example.com'}
-        />
+        <Medium color={colors.text} style={styles.name} label={user?.name} />
+        <Regular color={colors.text} style={styles.email} label={user?.email} />
 
         <Bold
           color={colors.text}
