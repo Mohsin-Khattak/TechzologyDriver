@@ -26,6 +26,7 @@ import {useAppSelector} from 'hooks/use-store';
 const HomeTab = props => {
   const user = useAppSelector(s => s);
   const userId = user?.user?.userInfo?.user?.id;
+  console.log('user id chck==========>', userId);
 
   const colors = useTheme().colors;
   const [data, getData] = React.useState({});

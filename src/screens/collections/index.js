@@ -10,7 +10,7 @@ import {useTheme} from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
 
 import {Earnings} from 'assets/icons/app-icons';
-import EarningCard from 'components/molecules/earning-card';
+
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
@@ -19,6 +19,8 @@ import {
   getCollection,
   getCollectionHistory,
 } from 'services/api/auth-api-actions';
+import {Loader} from 'components/atoms/loader';
+import CollectionCard from 'components/molecules/collection-card';
 
 const Collection = props => {
   const colors = useTheme().colors;
@@ -27,42 +29,65 @@ const Collection = props => {
 
   const [data, getData] = React.useState({});
   const [history, getHistory] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
+  const [pageLoading, setPageLoading] = React.useState(false);
+  const [pageNumber, setPageNumber] = React.useState(1);
   const fetchData = async () => {
     try {
+      setLoading(true);
       const res = await getCollection(userId);
       getData(res);
-      const resHistory = await getCollectionHistory(userId);
-      console.log('history check===?', resHistory);
-      getHistory(resHistory);
     } catch (error) {
       console.log('error=====>', UTILS.returnError());
+    } finally {
+      setLoading(false);
     }
   };
+
+  const fetchCollectionHistory = async setDataLoading => {
+    try {
+      setLoading(true);
+      setDataLoading(true);
+      const res = await getCollectionHistory(userId, pageNumber);
+      console.log('fetch history response check=======>', res);
+      getHistory(preProducts =>
+        pageNumber > 1
+          ? {
+              ...res,
+              data: preProducts?.data
+                ? [...preProducts?.data, ...res?.data]
+                : [...res?.data],
+            }
+          : res,
+      );
+    } catch (error) {
+      console.log('Error in getProducts====>', error);
+      Alert.alert('Products Error', UTILS.returnError(error));
+    } finally {
+      setDataLoading(false);
+      setLoading(false);
+    }
+  };
+  const handleLoadMore = () => {
+    const lastPage = Math.ceil(
+      (history?.meta?.total || 0) / history?.meta?.per_page,
+    );
+    if (!pageLoading && pageNumber < lastPage) {
+      setPageNumber(prevPageNumber => prevPageNumber + 1);
+    }
+  };
+  React.useEffect(() => {
+    if (pageNumber > 0 && !pageLoading) {
+      fetchCollectionHistory(setPageLoading);
+    }
+  }, [pageNumber]);
   React.useEffect(() => {
     fetchData();
   }, []);
 
-  const featuredCategories = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 3,
-    },
-  ];
-
   const renderEarnings = ({item}) => (
-    <EarningCard
+    <CollectionCard
       item={item}
       onPress={() => navigate('OrderDetails', {status: '4'})}
     />
@@ -71,62 +96,70 @@ const Collection = props => {
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('Collection')} />
-      <Row style={{paddingHorizontal: mvs(20), marginTop: mvs(20)}}>
-        <Row style={styles.balanceContainer}>
-          <View>
-            <Regular
-              fontSize={mvs(12)}
-              color={colors.white}
-              label={t('today')}
-            />
-            <Bold
-              style={{marginVertical: mvs(5)}}
-              color={colors.white}
-              fontSize={mvs(18)}
-              label={data?.today_collection}
-            />
-            <Regular
-              fontSize={mvs(12)}
-              color={colors.white}
-              label={data?.today_date}
-            />
-          </View>
-          <Earnings />
-        </Row>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Row style={{paddingHorizontal: mvs(20), marginTop: mvs(20)}}>
+            <Row style={styles.balanceContainer}>
+              <View>
+                <Regular
+                  fontSize={mvs(12)}
+                  color={colors.white}
+                  label={t('today')}
+                />
+                <Bold
+                  style={{marginVertical: mvs(5)}}
+                  color={colors.white}
+                  fontSize={mvs(18)}
+                  label={data?.today_collection}
+                />
+                <Regular
+                  fontSize={mvs(12)}
+                  color={colors.white}
+                  label={data?.today_date}
+                />
+              </View>
+              <Earnings />
+            </Row>
 
-        <View
-          style={{
-            ...styles.rechargeContainer,
-            backgroundColor: colors.green,
-          }}>
-          <Regular
-            fontSize={mvs(12)}
-            color={colors.white}
-            label={t('yesterday')}
+            <View
+              style={{
+                ...styles.rechargeContainer,
+                backgroundColor: colors.green,
+              }}>
+              <Regular
+                fontSize={mvs(12)}
+                color={colors.white}
+                label={t('yesterday')}
+              />
+              <Bold
+                style={{marginVertical: mvs(5)}}
+                color={colors.white}
+                fontSize={mvs(18)}
+                label={data?.yesterday_collection}
+              />
+              <Regular
+                fontSize={mvs(12)}
+                color={colors.white}
+                label={data?.yesterday_date}
+              />
+            </View>
+          </Row>
+          <CustomFlatList
+            showsVerticalScrollIndicator={false}
+            data={history?.data || []}
+            renderItem={renderEarnings}
+            onEndReached={handleLoadMore} // Load more when reaching the end of the list
+            onEndReachedThreshold={0.5} // Load more when the user reaches the last 50% of the list
+            ListFooterComponent={pageLoading && <Loader />}
+            contentContainerStyle={{
+              paddingBottom: mvs(20),
+              paddingHorizontal: mvs(20),
+            }}
           />
-          <Bold
-            style={{marginVertical: mvs(5)}}
-            color={colors.white}
-            fontSize={mvs(18)}
-            label={data?.yesterday_collection}
-          />
-          <Regular
-            fontSize={mvs(12)}
-            color={colors.white}
-            label={data?.yesterday_date}
-          />
-        </View>
-      </Row>
-
-      <CustomFlatList
-        showsVerticalScrollIndicator={false}
-        data={history?.data}
-        renderItem={renderEarnings}
-        contentContainerStyle={{
-          paddingBottom: mvs(20),
-          paddingHorizontal: mvs(20),
-        }}
-      />
+        </>
+      )}
     </View>
   );
 };

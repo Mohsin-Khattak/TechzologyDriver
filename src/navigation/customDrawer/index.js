@@ -25,7 +25,7 @@ import {UTILS} from 'utils';
 
 const CustomDrawer = props => {
   const colors = useTheme().colors;
-
+  const [loading, setLoading] = React.useState(false);
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(s => s);
   const user = userInfo?.user?.userInfo?.user;
@@ -128,8 +128,9 @@ const CustomDrawer = props => {
         />
 
         <IconButton
-          onPress={() => logout()}
+          onPress={logOut}
           title={t('Logout')}
+          loading={loading}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
           Icon={<LogOut />}

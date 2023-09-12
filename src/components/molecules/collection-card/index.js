@@ -7,7 +7,7 @@ import Medium from 'typography/medium-text';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 
-const EarningCard = ({item, style, onPress, loading}) => {
+const CollectionCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
 
   return (
@@ -23,10 +23,10 @@ const EarningCard = ({item, style, onPress, loading}) => {
           />
         </View>
         <View style={styles.priceContainer}>
-          <Medium fontSize={mvs(12)} label={item?.earning} />
+          <Medium fontSize={mvs(12)} label={item?.collection} />
         </View>
       </Row>
     </TouchableOpacity>
   );
 };
-export default React.memo(EarningCard);
+export default React.memo(CollectionCard);

@@ -25,10 +25,9 @@ export const onLogin = (
       setLoading(true);
       const res = await postData(URLS.auth.login, values);
       await UTILS.setItem(STORAGEKEYS.token, res?.access_token);
-
+      await UTILS.setItem(STORAGEKEYS.user, JSON.stringify(res?.user));
       console.log('res of onLogin=>', res);
       dispatch(setUserInfo(res));
-
       navigate('Drawer')
     } catch (error: any) {
       console.log('error in login', UTILS.returnError(error));
@@ -51,7 +50,8 @@ export const logout = () => getData(URLS.auth.logout);
 //////////get dashboard/////////////////
 export const getDashBoard = (userId: any) => getData(`${URLS.dashboard.get_dashboard}${userId}`)
 export const getCollection = (userId: any) => getData(`${URLS.dashboard.get_collection}${userId}`)
-// export const getCollectionHistory = (userId: any) => getData(`${URLS.dashboard.get_collection_history}${userId}`)
+export const getEarning = (userId: any) => getData(`${URLS.dashboard.get_earning}${userId}`)
+
 export const getCollectionHistory = (userId: any, pageNumber: any) => {
   let url = `${URLS.dashboard.get_collection_history}${userId}?page=${pageNumber}`;
   return getData(url);

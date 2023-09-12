@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SplashIcon } from 'assets/icons';
-
+import { useAppDispatch } from 'hooks/use-store';
 import React from 'react';
 import { ImageBackground, View } from 'react-native';
 import { getNotifications, getUserInfo } from 'services/api/auth-api-actions';
@@ -15,9 +15,7 @@ import {
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
 import { useTheme } from '@react-navigation/native';
-import { useAppDispatch } from 'hooks/use-store';
 import { SplashImg } from 'assets/images';
-
 type props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const Splash = (props: props) => {
@@ -52,9 +50,12 @@ const Splash = (props: props) => {
           dispatch(setLanguage(lang ?? 'en'));
         });
 
-        UTILS.getItem(STORAGEKEYS.token).then(async (token: any) => {
-          if (token) {
+        UTILS.getItem(STORAGEKEYS.user).then(async (user: any) => {
+          console.log('user data check===>', user);
+
+          if (user) {
             try {
+              dispatch(setUserInfo(JSON.parse(user)));
               screen = 'Drawer';
 
             } catch (error) {

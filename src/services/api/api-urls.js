@@ -27,6 +27,7 @@ export const URLS = {
   dashboard: {
     get_dashboard: 'v2/delivery-boy/dashboard-summary/',
     get_collection: 'v2/delivery-boy/collection-summary/',
-    get_collection_history: 'v2/delivery-boy/collection/?page=',
+    get_collection_history: 'v2/delivery-boy/collection/',
+    get_earning: 'v2/delivery-boy/earning-summary/',
   },
 };
