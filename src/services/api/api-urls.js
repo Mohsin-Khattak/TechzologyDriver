@@ -30,5 +30,6 @@ export const URLS = {
     get_collection_history: 'v2/delivery-boy/collection/',
     get_earning: 'v2/delivery-boy/earning-summary/',
     get_completed_delivery: 'v2/delivery-boy/deliveries/completed/',
+    get_completed_delivery_history: 'v2/delivery-boy/purchase-history-details/',
   },
 };

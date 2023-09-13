@@ -1,46 +1,63 @@
 import AppHeader from 'components/atoms/headers/app-header';
 import {Row} from 'components/atoms/row';
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 
-import {
-  DeliveryThree,
-  Like,
-  Refund,
-  RefundTwo,
-  ShoppingBag,
-  Tick,
-  TickTwo,
-} from 'assets/icons';
-import Medium from 'typography/medium-text';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
+import {useTheme} from '@react-navigation/native';
+import {DeliveryThree, Like, ShoppingBag, Tick, TickTwo} from 'assets/icons';
 import {PrimaryButton} from 'components/atoms/buttons';
-import OrderConfirmationModal from 'components/molecules/modals/order-conformation-modal';
 import CustomMap from 'components/atoms/custom-map';
 import MapDirections from 'components/atoms/custom-map-direction';
-import {navigate} from 'navigation/navigation-ref';
-import {useTheme} from '@react-navigation/native';
+import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import DeliveredModal from 'components/molecules/modals/delivered-modal';
+import OrderConfirmationModal from 'components/molecules/modals/order-conformation-modal';
+import {Alert} from 'react-native';
+import {getCompletedDeliveryDetails} from 'services/api/auth-api-actions';
+import Medium from 'typography/medium-text';
+import {UTILS} from 'utils';
 
 const OrderDetails = props => {
   const colors = useTheme().colors;
 
-  const {status, order} = props?.route?.params || {};
-  console.log('status check===>', status);
+  const {status, order, deliveryId} = props?.route?.params || {};
+
   const data = order;
   const [orderConformationModal, setOrderConfirmationModal] =
     React.useState(false);
   const [deliveredModal, setDeliveredModal] = React.useState(false);
   const origin = {latitude: 31.560249, longitude: 74.362284};
   const destination = {latitude: 31.556014, longitude: 74.354795};
+  const [loading, setLoading] = React.useState(false);
+  const [completeDeliveryHistory, setCompleteDeliveryHistory] = React.useState(
+    [],
+  );
+  const complete = completeDeliveryHistory;
+  console.log('order details res check=======>', complete);
+
+  const fetchCompleteHistoryDetails = async () => {
+    try {
+      const res = await getCompletedDeliveryDetails(deliveryId);
+      setCompleteDeliveryHistory(res);
+    } catch (error) {
+      console.log('Error in getProducts====>', error);
+      Alert.alert('Products Error', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchCompleteHistoryDetails();
+  }, []);
+
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('order_details')} />
+
       <KeyboardAvoidScrollview contentContainerStyle={{paddingBottom: mvs(20)}}>
         <Row style={{marginTop: mvs(25)}}>
           <View style={{alignItems: 'center'}}>
@@ -131,7 +148,10 @@ const OrderDetails = props => {
         </View>
 
         <View
-          style={{...styles.innerContainer, backgroundColor: colors.downColor}}>
+          style={{
+            ...styles.innerContainer,
+            backgroundColor: colors.downColor,
+          }}>
           <Row>
             <View style={{width: '45%'}}>
               <Regular
@@ -139,7 +159,10 @@ const OrderDetails = props => {
                 style={styles.title}
                 label={t('order_code')}
               />
-              <Regular fontSize={mvs(12)} label={t('20210401-122325')} />
+              <Regular
+                fontSize={mvs(12)}
+                label={complete?.order_details?.code}
+              />
             </View>
             <View style={{width: '45%'}}>
               <Regular
@@ -147,7 +170,10 @@ const OrderDetails = props => {
                 style={styles.title}
                 label={t('shipping_method')}
               />
-              <Regular fontSize={mvs(12)} label={'Home Delivery'} />
+              <Regular
+                fontSize={mvs(12)}
+                label={complete?.order_details?.shipping_type}
+              />
             </View>
           </Row>
           <Row>
@@ -157,7 +183,7 @@ const OrderDetails = props => {
                 style={styles.title}
                 label={t('order_date')}
               />
-              <Regular fontSize={mvs(12)} label={t('04-08-2023')} />
+              <Regular fontSize={mvs(12)} label={complete?.date_developer} />
             </View>
             <View style={{width: '45%'}}>
               <Regular
@@ -165,7 +191,10 @@ const OrderDetails = props => {
                 style={styles.title}
                 label={t('payment_method')}
               />
-              <Regular fontSize={mvs(12)} label={'Cash On Delivery'} />
+              <Regular
+                fontSize={mvs(12)}
+                label={complete?.order_details?.payment_type}
+              />
             </View>
           </Row>
           <Row>
@@ -176,13 +205,16 @@ const OrderDetails = props => {
                 label={t('payment_status')}
               />
               <Row>
-                <Regular fontSize={mvs(12)} label={'Unpaid'} />
+                <Regular
+                  fontSize={mvs(12)}
+                  label={complete?.order_details?.payment_status}
+                />
                 <View
                   style={[
                     styles.paidContainer,
                     {
                       backgroundColor:
-                        data?.payment_status === 'Paid'
+                        complete?.order_details?.payment_status === 'paid'
                           ? colors.green
                           : colors.red,
                     },
@@ -197,7 +229,10 @@ const OrderDetails = props => {
                 style={styles.title}
                 label={t('delivery_status')}
               />
-              <Regular fontSize={mvs(12)} label={'Order placed'} />
+              <Regular
+                fontSize={mvs(12)}
+                label={complete?.order_details?.delivery_status}
+              />
             </View>
           </Row>
           <Row>
@@ -213,7 +248,7 @@ const OrderDetails = props => {
                   color={colors.text}
                   style={styles.addressTitle}
                   fontSize={mvs(12)}
-                  label={'kushal chavan'}
+                  label={complete?.shipping_adress_developer?.name}
                 />
               </Row>
               <Row style={{justifyContent: 'flex-start'}}>
@@ -222,7 +257,7 @@ const OrderDetails = props => {
                   color={colors.text}
                   style={styles.addressTitle}
                   fontSize={mvs(12)}
-                  label={'customer@example.com'}
+                  label={complete?.shipping_adress_developer?.email}
                 />
               </Row>
               <Row style={{justifyContent: 'flex-start'}}>
@@ -231,7 +266,7 @@ const OrderDetails = props => {
                   color={colors.text}
                   style={styles.addressTitle}
                   fontSize={mvs(12)}
-                  label={'your location'}
+                  label={complete?.shipping_adress_developer?.address}
                 />
               </Row>
               <Row style={{justifyContent: 'flex-start'}}>
@@ -240,7 +275,7 @@ const OrderDetails = props => {
                   color={colors.text}
                   style={styles.addressTitle}
                   fontSize={mvs(12)}
-                  label={'your country'}
+                  label={complete?.shipping_adress_developer?.country}
                 />
               </Row>
               <Row style={{justifyContent: 'flex-start'}}>
@@ -249,7 +284,7 @@ const OrderDetails = props => {
                   color={colors.text}
                   style={styles.addressTitle}
                   fontSize={mvs(12)}
-                  label={'03448422399'}
+                  label={complete?.shipping_adress_developer?.phone}
                 />
               </Row>
               <Row style={{justifyContent: 'flex-start'}}>
@@ -258,7 +293,7 @@ const OrderDetails = props => {
                   color={colors.text}
                   style={styles.addressTitle}
                   fontSize={mvs(12)}
-                  label={'31313'}
+                  label={complete?.shipping_adress_developer?.postal_code}
                 />
               </Row>
             </View>
@@ -268,7 +303,10 @@ const OrderDetails = props => {
                 style={styles.title}
                 label={t('total_amount')}
               />
-              <Regular fontSize={mvs(12)} label={'$130.00'} />
+              <Regular
+                fontSize={mvs(12)}
+                label={`${'$ '}${complete?.order_details?.grand_total}`}
+              />
             </View>
           </Row>
         </View>
@@ -381,7 +419,10 @@ const OrderDetails = props => {
               <PrimaryButton
                 onPress={() => setDeliveredModal(true)}
                 textStyle={{color: colors.primary}}
-                containerStyle={{backgroundColor: colors.skyBlue, width: '55%'}}
+                containerStyle={{
+                  backgroundColor: colors.skyBlue,
+                  width: '55%',
+                }}
                 title={'Mark As Delivered'}
               />
             </Row>

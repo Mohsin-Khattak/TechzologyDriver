@@ -90,6 +90,7 @@ const DeliveryTab = props => {
       onPress={() =>
         navigate('OrderDetails', {
           status: '4',
+          deliveryId: item?.id,
         })
       }
     />

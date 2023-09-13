@@ -1,22 +1,19 @@
+import {useTheme} from '@react-navigation/native';
+import {Read, ViewDetails} from 'assets/icons/app-icons';
+import {IconButton} from 'components/atoms/buttons';
 import {Row} from 'components/atoms/row';
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {View} from 'react-native';
 import Medium from 'typography/medium-text';
-import styles from './styles';
 import Regular from 'typography/regular-text';
-import {Clander, CreaditCard, Delivery} from 'assets/icons';
-import {useTheme} from '@react-navigation/native';
-import {IconButton} from 'components/atoms/buttons';
-import {Read, ViewDetails} from 'assets/icons/app-icons';
+import styles from './styles';
 
 const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
-  console.log('item me check=======>', item);
   const colors = useTheme().colors;
 
   return (
-    <View style={{...styles.container}}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <Row
         style={{
           backgroundColor: colors.background,

@@ -61,6 +61,8 @@ export const getCompletedDelivery = (userId: any, dateRange: any, paymentType: a
   let url = `${URLS.dashboard.get_completed_delivery}${userId}?date_range=${dateRange}&payment_type=${paymentType}&page=${pageNumber}`;
   return getData(url);
 };
+export const getCompletedDeliveryDetails = (deliveryId: any) => getData(`${URLS.dashboard.get_completed_delivery_history}${deliveryId}`)
+
 
 //export const getCompletedDelivery = (userId: any, dateRange: any, paymentType: any, pageNumber: any) => getData(`${URLS.dashboard.get_completed_delivery}${userId}?date_range=${dateRange}&payment_type=${paymentType}&page=${pageNumber}`)
 
