@@ -8,6 +8,7 @@ const Drawer = createDrawerNavigator();
 
 function DrawerNavigator(props) {
   const {initialRoute} = props?.route?.params || {};
+
   return (
     <>
       <Drawer.Navigator

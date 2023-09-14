@@ -133,7 +133,17 @@
   //delivery boy
   "login_in_to_techzology_delivery_boy":"Login in to techzology delivery boy",
   "or_login_with_phone_number":"Or, Login with a phone number",
-  "fingind_problem":"If you are finding any problem while logging in please contact the admin"
+  "fingind_problem":"If you are finding any problem while logging in please contact the admin",
+  "completed_delivery":"Completed Delivery",
+  "pending_delivery":"Pending Delivery",
+  "total_collected":"Total Collected",
+  "earnings":"Earnings",
+  "cancelled_delivery":"Cancelled Delivery",
+  "on_the_way":"On The Way",
+  "assigned":"Assigned",
+  "picked":"Picked",
+  "dashboard":"Dashboard",
+  "my_collection":"My Collection"
 
 
 

@@ -26,11 +26,9 @@ const DeliveryTab = props => {
 
   const [loading, setLoading] = React.useState(false);
   const [select, setSelect] = React.useState(true);
-  const [selectByPayment, setSelectByPayment] = React.useState('all');
-  const [selectByDelivery, setSelectByDelivery] = React.useState('all');
+  const [selectByPayment, setSelectByPayment] = React.useState('');
+  const [selectByDelivery, setSelectByDelivery] = React.useState('');
   const [deliverySelect, setDeliverySelect] = React.useState(true);
-  // console.log('selected date range  check========>', selectByPayment);
-  // console.log('selected payment range  check========>', selectByDelivery);
 
   const [pageLoading, setPageLoading] = React.useState(false);
   const [pageNumber, setPageNumber] = React.useState(1);
@@ -111,7 +109,7 @@ const DeliveryTab = props => {
               <Regular
                 color={colors.text}
                 fontSize={mvs(12)}
-                label={t(selectByPayment)}
+                label={selectByPayment === '' ? t('All') : t(selectByPayment)}
               />
               <Entypo
                 name={'chevron-small-right'}
@@ -133,7 +131,7 @@ const DeliveryTab = props => {
               }}>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByPayment('all');
+                  setSelectByPayment('');
                   setSelect(!select);
                 }}>
                 <Regular
@@ -193,7 +191,7 @@ const DeliveryTab = props => {
               <Regular
                 color={colors.text}
                 fontSize={mvs(12)}
-                label={t(selectByDelivery)}
+                label={selectByDelivery === '' ? t('All') : t(selectByDelivery)}
               />
               <Entypo
                 name={'chevron-small-right'}

@@ -31,5 +31,7 @@ export const URLS = {
     get_earning: 'v2/delivery-boy/earning-summary/',
     get_completed_delivery: 'v2/delivery-boy/deliveries/completed/',
     get_completed_delivery_history: 'v2/delivery-boy/purchase-history-details/',
+    get_pending_delivery: 'v2/delivery-boy/deliveries/assigned/',
+    get_amount_delivery: 'v2/delivery-boy/purchase-history-items/',
   },
 };

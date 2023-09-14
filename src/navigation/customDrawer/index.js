@@ -22,6 +22,14 @@ import Regular from 'typography/regular-text';
 import {LogOut} from 'assets/icons/app-icons';
 import {logout} from 'services/api/auth-api-actions';
 import {UTILS} from 'utils';
+import {
+  CancleDrawer,
+  CoinDrawer,
+  CompleteDrawer,
+  HomeDrawer,
+  PendingDrawer,
+  UserDrawer,
+} from 'assets/icons/drawer-icon';
 
 const CustomDrawer = props => {
   const colors = useTheme().colors;
@@ -74,53 +82,55 @@ const CustomDrawer = props => {
       <View style={styles.line} />
       <View style={styles.innerContainer}>
         <IconButton
-          onPress={() => navigate('MyWallet')}
-          title={t('my_wallet')}
+          onPress={() => navigate('Home')}
+          title={t('dashboard')}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
-          Icon={<Wallet />}
+          Icon={<HomeDrawer />}
         />
         <IconButton
-          onPress={() => navigate('OrderHistory')}
-          title={t('orders')}
+          onPress={() =>
+            props?.navigation?.replace('Drawer', {
+              initialRoute: 'Delivery',
+            })
+          }
+          title={t('completed_delivery')}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
-          Icon={<Carttt />}
+          Icon={<CompleteDrawer />}
         />
         <IconButton
-          onPress={() => navigate('MyWishList')}
-          title={t('my_wishlist')}
+          onPress={() => navigate('PendingDelivery')}
+          title={t('pending_delivery')}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
-          Icon={<Heart />}
+          Icon={<PendingDrawer />}
         />
         <IconButton
           onPress={() => navigate('RefundStatus')}
-          title={t('refund_requests')}
+          title={t('cancelled_delivery')}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
-          Icon={<Refund />}
+          Icon={<CancleDrawer />}
         />
         <IconButton
-          onPress={() => navigate('EditProfile')}
-          title={t('edit_profile')}
+          onPress={() => navigate('Collection')}
+          title={t('my_collection')}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
-          Icon={<UserEdit />}
+          Icon={<CoinDrawer />}
         />
+
         <IconButton
-          onPress={() => navigate('AddressDetails')}
-          title={t('address')}
+          onPress={() =>
+            props?.navigation?.replace('Drawer', {
+              initialRoute: 'Me',
+            })
+          }
+          title={t('profile')}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
-          Icon={<Location />}
-        />
-        <IconButton
-          onPress={() => navigate('BrowseAllVenders')}
-          title={t('browse_all_venders')}
-          textStyle={{...styles.textStyle, color: colors.text}}
-          containerStyle={{backgroundColor: colors.background}}
-          Icon={<Shop />}
+          Icon={<UserDrawer />}
         />
 
         <IconButton

@@ -45,7 +45,7 @@ const HomeTab = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <HomeHeader menu title={'Dashboard'} />
+      <HomeHeader menu title={t('dashboard')} />
 
       <Row style={{paddingHorizontal: mvs(20)}}>
         <TouchableOpacity
@@ -75,7 +75,7 @@ const HomeTab = props => {
           onPress={() => navigate('MyEarning')}
           style={styles.compeleteContainer}>
           <Earnings />
-          <Regular style={styles.text} label={t('Earnings')} />
+          <Regular style={styles.text} label={t('earnings')} />
           <Bold style={styles.text} label={data?.total_earning} />
         </TouchableOpacity>
       </Row>
@@ -84,13 +84,13 @@ const HomeTab = props => {
           <Cancle />
           <Regular
             style={{marginLeft: mvs(20), flex: 1}}
-            label={'cancelled_delivery'}
+            label={t('cancelled_delivery')}
           />
           <Regular label={data?.cancelled} />
         </Row>
         <Row style={{marginTop: mvs(20)}}>
           <TouchableOpacity
-            onPress={() => navigate('PendingDelivery')}
+            onPress={() => navigate('PendingDelivery', {pending: 'pending'})}
             style={{alignItems: 'center'}}>
             <View style={styles.circle}>
               <Delivery />
@@ -98,7 +98,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={`${'on_the_way '}${'('}${data?.on_the_way}${')'} `}
+              label={`${t('on_the_way')} ${'('}${data?.on_the_way}${')'} `}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -110,7 +110,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={`${'picked '}${'('}${data?.picked}${')'} `}
+              label={`${t('picked')} ${'('}${data?.picked}${')'} `}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -122,7 +122,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={`${'assigned '}${'('}${data?.assigned}${')'} `}
+              label={`${t('assigned')} ${'('}${data?.assigned}${')'} `}
             />
           </TouchableOpacity>
         </Row>

@@ -24,9 +24,9 @@ const DeliveryPendingCard = ({
   setDeliveredModal,
 }) => {
   const colors = useTheme().colors;
-
+  console.log('item me check=======>', item);
   return (
-    <View style={{...styles.container}}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <Row
         style={{
           backgroundColor: colors.background,
@@ -34,7 +34,7 @@ const DeliveryPendingCard = ({
         }}>
         <View style={styles.contentContainer}>
           <Regular label={'Order Code'} />
-          <Regular style={{marginTop: mvs(5)}} label={item?.id} />
+          <Regular style={{marginTop: mvs(5)}} label={item?.code} />
           <Row style={{alignItems: 'center'}}>
             <Regular
               style={{
@@ -48,7 +48,7 @@ const DeliveryPendingCard = ({
             <Medium
               style={{marginTop: mvs(5)}}
               fontSize={mvs(12)}
-              label={'$12.150'}
+              label={item?.grand_total}
             />
           </Row>
 
@@ -57,8 +57,8 @@ const DeliveryPendingCard = ({
               color: colors.text,
               fontSize: mvs(14),
             }}
-            // label={`${'Payment Status -'} ${item?.payment_status}`}
-            label={`${'Payment Status '}`}
+            label={`${'Payment Status -'} ${item?.payment_status}`}
+            // label={`${'Payment Status '}`}
           />
 
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
@@ -68,7 +68,7 @@ const DeliveryPendingCard = ({
                 fontSize: mvs(12),
                 marginTop: mvs(5),
               }}
-              label={'Cash On Delivery'}
+              label={item?.payment_type}
             />
             <View style={styles.cross}>
               <TickTwo />

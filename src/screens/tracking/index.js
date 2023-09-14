@@ -68,7 +68,7 @@ const Tracking = props => {
                 containerStyle={styles.chatBtn}
                 title={t('call')}
               />
-              <IconButton
+              {/* <IconButton
                 Icon={
                   <MaterialIcons
                     name={'message'}
@@ -80,7 +80,7 @@ const Tracking = props => {
                 textStyle={{fontSize: mvs(14)}}
                 containerStyle={styles.messageBtn}
                 title={t('chat')}
-              />
+              /> */}
             </Row>
           </Row>
           <Row>
