@@ -27,7 +27,7 @@ export const onLogin = (
       await UTILS.setItem(STORAGEKEYS.token, res?.access_token);
       await UTILS.setItem(STORAGEKEYS.user, JSON.stringify(res?.user));
       console.log('res of onLogin=>', res);
-      dispatch(setUserInfo(res));
+      dispatch(setUserInfo(res?.user));
       navigate('Drawer')
     } catch (error: any) {
       console.log('error in login', UTILS.returnError(error));

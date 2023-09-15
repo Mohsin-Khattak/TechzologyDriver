@@ -106,7 +106,18 @@ const PendingDelivery = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('Pending Delivery')} />
+      <AppHeader
+        back
+        title={
+          assign
+            ? t('assign')
+            : picked
+            ? t('picked')
+            : pending
+            ? t('pending_delivery')
+            : t('on_the_way')
+        }
+      />
       {loading ? (
         <Loader />
       ) : (
@@ -128,6 +139,12 @@ const PendingDelivery = props => {
                 fontSize={mvs(12)}
                 style={{marginLeft: mvs(10)}}
                 label={'Picked (47)'}
+              />
+            ) : pending ? (
+              <Regular
+                fontSize={mvs(12)}
+                style={{marginLeft: mvs(10)}}
+                label={'Pending Delivery (40)'}
               />
             ) : (
               <Regular

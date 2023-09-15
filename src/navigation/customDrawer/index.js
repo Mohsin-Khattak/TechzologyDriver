@@ -100,7 +100,7 @@ const CustomDrawer = props => {
           Icon={<CompleteDrawer />}
         />
         <IconButton
-          onPress={() => navigate('PendingDelivery')}
+          onPress={() => navigate('PendingDelivery', {pending: 'pending'})}
           title={t('pending_delivery')}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}

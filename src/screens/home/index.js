@@ -25,8 +25,8 @@ import {useAppSelector} from 'hooks/use-store';
 
 const HomeTab = props => {
   const {userInfo} = useAppSelector(s => s?.user);
+
   const userId = userInfo?.id;
-  console.log('user id check=========>', userId);
 
   const colors = useTheme().colors;
   const [data, getData] = React.useState({});
@@ -53,14 +53,20 @@ const HomeTab = props => {
           style={styles.compeleteContainer}>
           <CompletedDelivery />
           <Regular style={styles.text} label={t('completed_delivery')} />
-          <Bold style={styles.text} label={data?.completed_delivery} />
+          <Bold
+            style={styles.text}
+            label={data?.completed_delivery ? data?.completed_delivery : '0'}
+          />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigate('PendingDelivery')}
+          onPress={() => navigate('PendingDelivery', {pending: 'pending'})}
           style={styles.pendingContainer}>
           <PendingDelivery />
           <Regular style={styles.text} label={t('pending_delivery')} />
-          <Bold style={styles.text} label={data?.pending_delivery} />
+          <Bold
+            style={styles.text}
+            label={data?.pending_delivery ? data?.pending_delivery : '0'}
+          />
         </TouchableOpacity>
       </Row>
       <Row style={styles.boxContainer}>
@@ -69,14 +75,20 @@ const HomeTab = props => {
           style={styles.pendingContainer}>
           <TotalCollected />
           <Regular style={styles.text} label={t('total_collected')} />
-          <Bold style={styles.text} label={data?.total_collection} />
+          <Bold
+            style={styles.text}
+            label={data?.total_collection ? data?.total_collection : '$0'}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigate('MyEarning')}
           style={styles.compeleteContainer}>
           <Earnings />
           <Regular style={styles.text} label={t('earnings')} />
-          <Bold style={styles.text} label={data?.total_earning} />
+          <Bold
+            style={styles.text}
+            label={data?.total_earning ? data?.total_earning : '$0'}
+          />
         </TouchableOpacity>
       </Row>
       <View style={styles.bottomContainer}>
@@ -90,7 +102,7 @@ const HomeTab = props => {
         </Row>
         <Row style={{marginTop: mvs(20)}}>
           <TouchableOpacity
-            onPress={() => navigate('PendingDelivery', {pending: 'pending'})}
+            onPress={() => navigate('PendingDelivery')}
             style={{alignItems: 'center'}}>
             <View style={styles.circle}>
               <Delivery />
@@ -98,7 +110,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={`${t('on_the_way')} ${'('}${data?.on_the_way}${')'} `}
+              label={`${t ('on_the_way')} ${'('}${data?.on_the_way}${')'} `}
             />
           </TouchableOpacity>
           <TouchableOpacity
