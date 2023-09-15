@@ -36,7 +36,6 @@ const MyEarningTab = props => {
     try {
       setLoading(true);
       const res = await getEarning(userId);
-      console.log('fetch history response check=======>', res);
       getData(res);
     } catch (error) {
       console.log('error=====>', UTILS.returnError());
@@ -89,7 +88,9 @@ const MyEarningTab = props => {
   const renderEarnings = ({item}) => (
     <EarningCard
       item={item}
-      onPress={() => navigate('OrderDetails', {status: '4'})}
+      onPress={() =>
+        navigate('OrderDetails', {status: '4', deliveryId: item?.order_id})
+      }
     />
   );
 

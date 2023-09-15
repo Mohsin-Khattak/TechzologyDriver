@@ -8,6 +8,7 @@ import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 
 const EarningCard = ({item, style, onPress, loading}) => {
+  console.log('item check===>', item);
   const colors = useTheme().colors;
 
   return (

@@ -41,7 +41,6 @@ const OrderDetails = props => {
   );
   const [amount, setAmount] = React.useState({});
   const complete = completeDeliveryHistory;
-  console.log('order details res check=======>', amount);
 
   const fetchCompleteHistoryDetails = async () => {
     try {

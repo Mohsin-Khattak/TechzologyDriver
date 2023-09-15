@@ -88,7 +88,9 @@ const Collection = props => {
   const renderEarnings = ({item}) => (
     <CollectionCard
       item={item}
-      onPress={() => navigate('OrderDetails', {status: '4'})}
+      onPress={() =>
+        navigate('OrderDetails', {status: '4', deliveryId: item?.order_id})
+      }
     />
   );
 
