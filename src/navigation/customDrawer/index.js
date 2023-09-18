@@ -107,7 +107,7 @@ const CustomDrawer = props => {
           Icon={<PendingDrawer />}
         />
         <IconButton
-          // onPress={() => navigate('RefundStatus')}
+          onPress={() => navigate('CancelledDelivery')}
           title={t('cancelled_delivery')}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}

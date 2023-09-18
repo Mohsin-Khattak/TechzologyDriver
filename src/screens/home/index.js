@@ -92,14 +92,16 @@ const HomeTab = props => {
         </TouchableOpacity>
       </Row>
       <View style={styles.bottomContainer}>
-        <Row style={styles.cancelledContainer}>
-          <Cancle />
-          <Regular
-            style={{marginLeft: mvs(20), flex: 1}}
-            label={t('cancelled_delivery')}
-          />
-          <Regular label={data?.cancelled} />
-        </Row>
+        <TouchableOpacity onPress={() => navigate('CancelledDelivery')}>
+          <Row style={styles.cancelledContainer}>
+            <Cancle />
+            <Regular
+              style={{marginLeft: mvs(20), flex: 1}}
+              label={t('cancelled_delivery')}
+            />
+            <Regular label={data?.cancelled} />
+          </Row>
+        </TouchableOpacity>
         <Row style={{marginTop: mvs(20)}}>
           <TouchableOpacity
             onPress={() => navigate('PendingDelivery')}
@@ -110,7 +112,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={`${t ('on_the_way')} ${'('}${data?.on_the_way}${')'} `}
+              label={`${t('on_the_way')} ${'('}${data?.on_the_way}${')'} `}
             />
           </TouchableOpacity>
           <TouchableOpacity

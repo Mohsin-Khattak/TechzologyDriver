@@ -36,6 +36,6 @@ export const URLS = {
     get_on_the_way: 'v2/delivery-boy/deliveries/on_the_way/',
     get_picked_up: 'v2/delivery-boy/deliveries/picked_up/',
     change_status: 'v2/delivery-boy/change-delivery-status',
-    cancle_delivery: 'v2/delivery-boy/cancelled/',
+    get_cancle_delivery: 'v2/delivery-boy/deliveries/cancelled/',
   },
 };
