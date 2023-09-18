@@ -18,16 +18,15 @@ import Medium from 'typography/medium-text';
 import {useTheme} from '@react-navigation/native';
 const DeliveredModal = ({
   style,
-  email,
+
   visible = false,
-  value,
-  setValue,
-  userInfo,
-  isSubmited,
+
   onClose = item => {},
+  onChangeStatus,
+  changestatusLoading,
 }) => {
   const {t} = i18n;
-  const [loading, setLoading] = React.useState(false);
+
   const colors = useTheme().colors;
 
   return (
@@ -54,6 +53,8 @@ const DeliveredModal = ({
               }}
             />
             <PrimaryButton
+              onPress={onChangeStatus}
+              loading={changestatusLoading}
               title={t('confirm')}
               containerStyle={{
                 marginTop: mvs(20),

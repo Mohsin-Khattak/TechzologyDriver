@@ -67,6 +67,19 @@ export const getPendingDelivery = (userId: any, pageNumber: any) => {
   let url = `${URLS.dashboard.get_pending_delivery}${userId}?page=${pageNumber}`;
   return getData(url);
 };
+export const getOnTheWayDelivery = (userId: any, pageNumber: any) => {
+  let url = `${URLS.dashboard.get_on_the_way}${userId}?page=${pageNumber}`;
+  return getData(url);
+};
+export const getPickedUpDelivery = (userId: any, pageNumber: any) => {
+  let url = `${URLS.dashboard.get_picked_up}${userId}?page=${pageNumber}`;
+  return getData(url);
+};
+
+export const getChangeStatus = (values: any) => postData(URLS.dashboard.change_status, values)
+export const cancleDelivery = (orderId: any) => getData(`${URLS.dashboard.cancle_delivery}${orderId}`)
+
+
 
 
 //export const getCompletedDelivery = (userId: any, dateRange: any, paymentType: any, pageNumber: any) => getData(`${URLS.dashboard.get_completed_delivery}${userId}?date_range=${dateRange}&payment_type=${paymentType}&page=${pageNumber}`)

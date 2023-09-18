@@ -18,16 +18,14 @@ import Medium from 'typography/medium-text';
 import {useTheme} from '@react-navigation/native';
 const OrderConfirmationModal = ({
   style,
-  email,
+
   visible = false,
-  value,
-  setValue,
-  userInfo,
-  isSubmited,
+
+  onPressCancle,
   onClose = item => {},
 }) => {
   const {t} = i18n;
-  const [loading, setLoading] = React.useState(false);
+
   const colors = useTheme().colors;
 
   return (
@@ -54,6 +52,7 @@ const OrderConfirmationModal = ({
               }}
             />
             <PrimaryButton
+              onPress={onPressCancle}
               title={t('confirm')}
               containerStyle={{
                 marginTop: mvs(20),

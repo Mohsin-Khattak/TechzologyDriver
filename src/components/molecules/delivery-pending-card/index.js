@@ -22,9 +22,11 @@ const DeliveryPendingCard = ({
   loading,
   onPressDirection,
   setDeliveredModal,
+  setOrderId,
+  markas,
 }) => {
   const colors = useTheme().colors;
-  console.log('item me check=======>', item);
+
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <Row
@@ -98,9 +100,11 @@ const DeliveryPendingCard = ({
               onPress={onPress}
             />
             <IconButton
-              onPress={() => setDeliveredModal(true)}
+              onPress={() => {
+                setDeliveredModal(true), setOrderId(item);
+              }}
               Icon={<CircleMark />}
-              title={'Mark As Delivered'}
+              title={markas}
               textStyle={{marginLeft: mvs(5), fontSize: mvs(12)}}
               containerStyle={{width: '50%', height: mvs(40)}}
             />

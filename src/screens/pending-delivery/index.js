@@ -15,7 +15,12 @@ import {Delivery} from 'assets/icons';
 import DeliveryPendingCard from 'components/molecules/delivery-pending-card';
 import DeliveredModal from 'components/molecules/modals/delivered-modal';
 import {UTILS} from 'utils';
-import {getPendingDelivery} from 'services/api/auth-api-actions';
+import {
+  getChangeStatus,
+  getOnTheWayDelivery,
+  getPendingDelivery,
+  getPickedUpDelivery,
+} from 'services/api/auth-api-actions';
 import {Loader} from 'components/atoms/loader';
 import {useAppSelector} from 'hooks/use-store';
 
@@ -27,21 +32,25 @@ const PendingDelivery = props => {
   const {picked, assign, pending} = props?.route?.params || {};
   const [deliveredModal, setDeliveredModal] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [order, setOrderId] = React.useState({});
 
   const [pageLoading, setPageLoading] = React.useState(false);
   const [pageNumber, setPageNumber] = React.useState(1);
   const [data, setData] = React.useState([]);
+  const [changestatusLoading, setChangeStatusLoading] = React.useState(false);
 
   const fetchData = async setDataLoading => {
     try {
       setLoading(true);
       setDataLoading(true);
-      const res = await getPendingDelivery(
-        userId,
-
-        pageNumber,
-      );
-
+      const apiEndPoint = picked
+        ? getPickedUpDelivery
+        : assign
+        ? getPendingDelivery
+        : pending
+        ? getPendingDelivery
+        : getOnTheWayDelivery;
+      const res = await apiEndPoint(userId, pageNumber);
       setData(preProducts =>
         pageNumber > 1
           ? {
@@ -60,6 +69,7 @@ const PendingDelivery = props => {
       setLoading(false);
     }
   };
+
   const handleLoadMore = () => {
     const lastPage = Math.ceil((data?.meta?.total || 0) / data?.meta?.per_page);
     if (!pageLoading && pageNumber < lastPage) {
@@ -70,13 +80,21 @@ const PendingDelivery = props => {
     if (pageNumber > 0 && !pageLoading) {
       fetchData(setPageLoading);
     }
-  }, [pageNumber]);
+  }, [pageNumber, ChangeStatus]);
 
   const renderPendingDelivery = ({item, index}) => (
     <DeliveryPendingCard
       setDeliveredModal={setDeliveredModal}
+      setOrderId={setOrderId}
       item={item}
       onPressDirection={() => navigate('Tracking')}
+      markas={
+        assign
+          ? 'Mark As Pickup'
+          : pending
+          ? 'Mark As Pick Up'
+          : 'Mark As Delivered'
+      }
       onPress={() =>
         navigate(
           'OrderDetails',
@@ -104,6 +122,32 @@ const PendingDelivery = props => {
     />
   );
 
+  const values = {
+    order_id: order?.id,
+    status: assign
+      ? 'picked_up'
+      : pending
+      ? 'picked_up'
+      : picked
+      ? 'on_the_way'
+      : 'delivered',
+    delivery_boy_id: userId,
+    payment_type:
+      order?.payment_type === 'Cash On Delivery' ? 'cash_on_delivery' : '',
+  };
+  const ChangeStatus = async () => {
+    try {
+      setChangeStatusLoading(true);
+      const res = await getChangeStatus(values);
+      setDeliveredModal(false);
+      console.log(res);
+    } catch (error) {
+      console.log('Error in getChangeStatus====>', error);
+      Alert.alert('Change Statuss Error', UTILS.returnError(error));
+    } finally {
+      setChangeStatusLoading(false);
+    }
+  };
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader
@@ -132,25 +176,25 @@ const PendingDelivery = props => {
               <Regular
                 fontSize={mvs(12)}
                 style={{marginLeft: mvs(10)}}
-                label={'Assigned (20)'}
+                label={`Assigned (${data?.data?.length || 0})`}
               />
             ) : picked ? (
               <Regular
                 fontSize={mvs(12)}
                 style={{marginLeft: mvs(10)}}
-                label={'Picked (47)'}
+                label={`Picked (${data?.data?.length || 0})`}
               />
             ) : pending ? (
               <Regular
                 fontSize={mvs(12)}
                 style={{marginLeft: mvs(10)}}
-                label={'Pending Delivery (40)'}
+                label={`Pending Delivery (${data?.data?.length || 0})`}
               />
             ) : (
               <Regular
                 fontSize={mvs(12)}
                 style={{marginLeft: mvs(10)}}
-                label={`${'On The Way'} ${'('}${setData.length}${')'}`}
+                label={`On The Way (${data?.data?.length || 0})`}
               />
             )}
           </Row>
@@ -172,6 +216,11 @@ const PendingDelivery = props => {
       <DeliveredModal
         onClose={() => setDeliveredModal(false)}
         visible={deliveredModal}
+        changestatusLoading={changestatusLoading}
+        setChangeStatusLoading={setChangeStatusLoading}
+        onChangeStatus={() => {
+          ChangeStatus(), setChangeStatusLoading(true);
+        }}
       />
     </View>
   );

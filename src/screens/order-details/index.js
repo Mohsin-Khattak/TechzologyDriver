@@ -17,6 +17,7 @@ import DeliveredModal from 'components/molecules/modals/delivered-modal';
 import OrderConfirmationModal from 'components/molecules/modals/order-conformation-modal';
 import {Alert} from 'react-native';
 import {
+  cancleDelivery,
   getCompletedDeliveryDetails,
   getDeliveryAmount,
 } from 'services/api/auth-api-actions';
@@ -39,8 +40,21 @@ const OrderDetails = props => {
   const [completeDeliveryHistory, setCompleteDeliveryHistory] = React.useState(
     [],
   );
+  console.log('history check=====>', completeDeliveryHistory?.order_details);
+  const orderId = completeDeliveryHistory?.order_details?.id;
+
   const [amount, setAmount] = React.useState({});
+
   const complete = completeDeliveryHistory;
+
+  const CancleOrder = async () => {
+    try {
+      await cancleDelivery(orderId);
+    } catch (error) {
+      console.log('Error in getProducts====>', error);
+      Alert.alert('Products Error', UTILS.returnError(error));
+    }
+  };
 
   const fetchCompleteHistoryDetails = async () => {
     try {
@@ -466,6 +480,7 @@ const OrderDetails = props => {
         </>
       )}
       <OrderConfirmationModal
+        onPressCancle={() => CancleOrder()}
         onClose={() => setOrderConfirmationModal(false)}
         visible={orderConformationModal}
       />
