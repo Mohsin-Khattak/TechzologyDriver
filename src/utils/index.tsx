@@ -370,43 +370,59 @@ export const UTILS = {
       throw new Error(error);
     }
   },
-  _returnImageGallery: async (multi = false) => {
+  _returnImageGallery: async (multi = false, base64 = false) => {
     try {
-      let image = await ImagePicker.openPicker({
-        multiple: multi,
-        // width: 1000,
-        // height: 800,
-        cropping: true,
-        includeBase64: false,
-        // compressImageQuality: 0.5,
-        // compressImageMaxWidth: 1500,
-        // compressImageMaxHeight: 1000,
-      });
-      if (multi) {
-        const result = image?.map((res: any) => {
-          const dotIndex = res?.path?.lastIndexOf('.');
-          const extension = res?.path.substring(dotIndex + 1);
+      if (base64) {
+
+        let image = await ImagePicker.openPicker({
+          multiple: multi,
+          // width: 1000,
+          // height: 800,
+          cropping: true,
+          includeBase64: true,
+          // compressImageQuality: 0.5,
+          // compressImageMaxWidth: 1500,
+          // compressImageMaxHeight: 1000,
+        });
+        return image;
+      } else {
+        let image = await ImagePicker.openPicker({
+          multiple: multi,
+          // width: 1000,
+          // height: 800,
+          cropping: true,
+          includeBase64: false,
+          // compressImageQuality: 0.5,
+          // compressImageMaxWidth: 1500,
+          // compressImageMaxHeight: 1000,
+        });
+        if (multi) {
+          const result = image?.map((res: any) => {
+            const dotIndex = res?.path?.lastIndexOf('.');
+            const extension = res?.path.substring(dotIndex + 1);
+            return {
+              uri:
+                Platform.OS === 'android'
+                  ? res?.path
+                  : res?.path.replace('file://', ''),
+              name: res?.filename || `${new Date().getTime()}.${extension}`,
+              type: res?.mime,
+            };
+          })
+          return result;
+        } else {
+          const dotIndex = image?.path?.lastIndexOf('.');
+          const extension = image?.path.substring(dotIndex + 1);
           return {
             uri:
               Platform.OS === 'android'
-                ? res?.path
-                : res?.path.replace('file://', ''),
-            name: res?.filename || `${new Date().getTime()}.${extension}`,
-            type: res?.mime,
+                ? image?.path
+                : image?.path.replace('file://', ''),
+            name: image?.filename || `${new Date().getTime()}.${extension}`,
+            type: image?.mime,
           };
-        })
-        return result;
-      } else {
-        const dotIndex = image?.path?.lastIndexOf('.');
-        const extension = image?.path.substring(dotIndex + 1);
-        return {
-          uri:
-            Platform.OS === 'android'
-              ? image?.path
-              : image?.path.replace('file://', ''),
-          name: image?.filename || `${new Date().getTime()}.${extension}`,
-          type: image?.mime,
-        };
+        }
+
       }
     } catch (error: any) {
       throw new Error(error);

@@ -22,21 +22,50 @@ import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import Bold from 'typography/bold-text';
 import {useAppSelector} from 'hooks/use-store';
+import {updateProfile, uploadImage} from 'services/api/auth-api-actions';
+import {useDispatch} from 'react-redux';
+import {Formik} from 'formik';
+import {
+  updatePasswordFormValidation,
+  updateProfileFormValidation,
+} from 'validations';
 
 const UserTab = props => {
   const colors = useTheme().colors;
+  const dispatch = useDispatch();
   const {userInfo} = useAppSelector(s => s?.user);
   const user = userInfo;
-
+  const payload = {...userInfo};
+  console.log(user);
 
   const [image, setImage] = React.useState();
   const [updatedModal, setUpdatedModal] = React.useState(false);
   const [passwordModal, setPasswordModal] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [passLoading, setPassLoading] = React.useState(false);
+
+  const onSubmit = async values => {
+    dispatch(updateProfile({...values, id: user?.id}, setLoading));
+    setUpdatedModal(true);
+  };
+  const onSubmitPassword = async values => {
+    dispatch(updateProfile({...values, id: user?.id}, setPassLoading));
+    setPasswordModal(true);
+  };
   const openGallery = async () => {
     try {
-      const res = await UTILS._returnImageGallery();
-      console.log(res);
-      setImage(res);
+      const res = await UTILS._returnImageGallery(false, true);
+      // console.log('res---->>>>', res?.data);
+      dispatch(
+        uploadImage(
+          {
+            filename: 'crisp.jpg',
+            image: res?.data,
+          },
+          () => {},
+        ),
+      );
+      // setImage(res);
     } catch (error) {
       console.log('upload image error', error);
       Alert.alert('Error', UTILS?.returnError(error));
@@ -47,15 +76,15 @@ const UserTab = props => {
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('Account')} />
       <KeyboardAvoidScrollview
-        contentContainerStyle={{paddingBottom: mvs(20), marginTop: mvs(50)}}>
+        contentContainerStyle={{paddingBottom: mvs(30), marginTop: mvs(50)}}>
         <ImageBackground
           source={{
-            uri: 'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg',
+            uri: user?.avatar_original, //'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg',
           }}
           borderRadius={mvs(100)}
           style={styles.imageBackGround}>
           <Image
-            source={image}
+            source={{uri: user?.updated_at}}
             style={{width: '100%', height: '100%', borderRadius: mvs(100)}}
           />
           <TouchableOpacity
@@ -73,18 +102,90 @@ const UserTab = props => {
           style={{marginTop: mvs(20)}}
           label={t('basic_information')}
         />
-        <PrimaryInput
-          containerStyle={{marginTop: mvs(40)}}
-          placeholder={t('name')}
-        />
+        <Formik
+          onSubmit={onSubmit}
+          initialValues={payload}
+          validationSchema={updateProfileFormValidation}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setTouched,
+            setFieldValue,
+            values,
+            touched,
+            errors,
+          }) => (
+            <>
+              <PrimaryInput
+                containerStyle={{marginTop: mvs(10)}}
+                placeholder={t('name')}
+                value={values?.name}
+                onChangeText={handleChange('name')}
+                error={touched?.name && errors?.name}
+              />
+              <PrimaryInput
+                placeholder={t('phone')}
+                value={`${values?.phone || ''}`}
+                onChangeText={handleChange('phone')}
+                error={touched?.phone && errors?.phone}
+              />
 
-        <PrimaryInput placeholder={t('new_password')} />
-        <PrimaryInput placeholder={t('retype_password')} />
-        <PrimaryButton
-          onPress={() => setUpdatedModal(true)}
-          title={t('update_profile')}
-        />
-
+              <PrimaryButton
+                onPress={handleSubmit}
+                loading={loading}
+                title={t('update_profile')}
+              />
+            </>
+          )}
+        </Formik>
+        <Formik
+          onSubmit={onSubmitPassword}
+          initialValues={{
+            password: '',
+            passowrd_confirmation: '',
+          }}
+          validationSchema={updatePasswordFormValidation}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setTouched,
+            setFieldValue,
+            values,
+            touched,
+            errors,
+          }) => (
+            <>
+              {console.log('errors::', errors, touched)}
+              <Medium
+                color={colors.text}
+                style={{paddingVertical: mvs(10)}}
+                label={t('password_changes')}
+              />
+              <PrimaryInput
+                placeholder={t('new_password')}
+                value={values?.password}
+                error={touched?.password && errors?.password}
+                onChangeText={handleChange('password')}
+              />
+              <PrimaryInput
+                placeholder={t('retype_password')}
+                value={values?.passowrd_confirmation}
+                error={
+                  touched?.passowrd_confirmation &&
+                  errors?.passowrd_confirmation
+                }
+                onChangeText={handleChange('passowrd_confirmation')}
+              />
+              <PrimaryButton
+                onPress={handleSubmit}
+                loading={passLoading}
+                title={t('update_password')}
+              />
+            </>
+          )}
+        </Formik>
         <UpdatedProfileModal
           onClose={() => setUpdatedModal(false)}
           visible={updatedModal}

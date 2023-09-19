@@ -1,27 +1,9 @@
 import * as React from 'react';
-import {Alert, ImageBackground, View} from 'react-native';
+import {Alert, Image, ImageBackground, View} from 'react-native';
 import styles from './styles';
 
 import {useTheme} from '@react-navigation/native';
-import {
-  Carttt,
-  Heart,
-  Location,
-  Refund,
-  Shop,
-  UserEdit,
-  Wallet,
-} from 'assets/icons';
-import {IconButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import {useAppDispatch, useAppSelector} from 'hooks/use-store';
-import {t} from 'i18next';
-import {navigate, resetStack} from 'navigation/navigation-ref';
-import Bold from 'typography/bold-text';
-import Regular from 'typography/regular-text';
 import {LogOut} from 'assets/icons/app-icons';
-import {logout} from 'services/api/auth-api-actions';
-import {UTILS} from 'utils';
 import {
   CancleDrawer,
   CoinDrawer,
@@ -30,6 +12,15 @@ import {
   PendingDrawer,
   UserDrawer,
 } from 'assets/icons/drawer-icon';
+import {IconButton} from 'components/atoms/buttons';
+import {mvs} from 'config/metrices';
+import {useAppDispatch, useAppSelector} from 'hooks/use-store';
+import {t} from 'i18next';
+import {navigate, resetStack} from 'navigation/navigation-ref';
+import {logout} from 'services/api/auth-api-actions';
+import Bold from 'typography/bold-text';
+import Regular from 'typography/regular-text';
+import {UTILS} from 'utils';
 
 const CustomDrawer = props => {
   const colors = useTheme().colors;
@@ -70,7 +61,7 @@ const CustomDrawer = props => {
         }}
         style={styles.imageStyle}
         borderRadius={mvs(100)}>
-        {/* <Image source={{uri: user?.profileImage}} style={styles.userImage} /> */}
+        <Image source={{uri: user?.avatar_original}} style={styles.userImage} />
       </ImageBackground>
 
       <Bold color={colors.text} label={user?.name} style={styles.userName} />

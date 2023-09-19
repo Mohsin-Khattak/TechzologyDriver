@@ -37,6 +37,45 @@ export const onLogin = (
     }
   };
 };
+export const uploadImage = (
+  data: any,
+  setLoading: (bool: boolean) => void
+) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      setLoading(true);
+      const res = await postData(URLS.auth.update_image, data);
+      // console.log('image api res====>', res);
+
+      UTILS.setItem(STORAGEKEYS.user, JSON.stringify(res?.user));
+      dispatch(setUserInfo(res?.user || []));
+    } catch (error: any) {
+      console.log('error in updateProfile', UTILS.returnError(error));
+      Alert.alert('', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+};
+export const updateProfile = (
+  data: any,
+  setLoading: (bool: boolean) => void
+) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      setLoading(true);
+      const res = await postData(URLS.auth.update_profile, data);
+      console.log('res::::', res);
+      UTILS.setItem(STORAGEKEYS.user, JSON.stringify(res?.user));
+      dispatch(setUserInfo(res?.user || []));
+    } catch (error: any) {
+      console.log('error in updateProfile', UTILS.returnError(error));
+      Alert.alert('', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+};
 export const onSignup = (values: any) => postData(URLS.auth.signup, values);
 export const verifyOtp = (values: any) => postData(URLS.auth.otp_verify, values);
 export const resendVerifyOtp = (values: any) => postData(URLS.auth.resend_otp_verify, values);

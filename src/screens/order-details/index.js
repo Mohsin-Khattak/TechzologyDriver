@@ -30,7 +30,6 @@ const OrderDetails = props => {
 
   const {status, order, deliveryId} = props?.route?.params || {};
 
-  const data = order;
   const [orderConformationModal, setOrderConfirmationModal] =
     React.useState(false);
   const [deliveredModal, setDeliveredModal] = React.useState(false);
@@ -40,7 +39,7 @@ const OrderDetails = props => {
   const [completeDeliveryHistory, setCompleteDeliveryHistory] = React.useState(
     [],
   );
-  console.log('history check=====>', completeDeliveryHistory?.order_details);
+
   const orderId = completeDeliveryHistory?.order_details?.id;
 
   const [amount, setAmount] = React.useState({});

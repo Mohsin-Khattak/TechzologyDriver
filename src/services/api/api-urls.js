@@ -13,9 +13,10 @@ export const URLS = {
     resend_otp_verify: 'v2/auth/resend_code',
     forget_password: 'v2/auth/password/forget_request',
     resend_password_code: 'v2/auth/password/resend_code',
-    update_profile: 'user/updateProfile',
+    update_profile: 'v2/profile/update',
     locations: 'locations',
     logout: 'v2/auth/logout',
+    update_image: 'v2/profile/image-upload',
   },
 
   address: {
