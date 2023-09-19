@@ -33,6 +33,7 @@ export const URLS = {
     get_completed_delivery: 'v2/delivery-boy/deliveries/completed/',
     get_completed_delivery_history: 'v2/delivery-boy/purchase-history-details/',
     get_pending_delivery: 'v2/delivery-boy/deliveries/assigned/',
+    get_confirm_delivery: 'v2/delivery-boy/deliveries/confirmed/',
     get_amount_delivery: 'v2/delivery-boy/purchase-history-items/',
     get_on_the_way: 'v2/delivery-boy/deliveries/on_the_way/',
     get_picked_up: 'v2/delivery-boy/deliveries/picked_up/',

@@ -110,6 +110,10 @@ export const getPendingDelivery = (userId: any, pageNumber: any) => {
   let url = `${URLS.dashboard.get_pending_delivery}${userId}?page=${pageNumber}`;
   return getData(url);
 };
+export const getConfirmDelivery = (userId: any, pageNumber: any) => {
+  let url = `${URLS.dashboard.get_confirm_delivery}${userId}?page=${pageNumber}`;
+  return getData(url);
+};
 export const getOnTheWayDelivery = (userId: any, pageNumber: any) => {
   let url = `${URLS.dashboard.get_on_the_way}${userId}?page=${pageNumber}`;
   return getData(url);

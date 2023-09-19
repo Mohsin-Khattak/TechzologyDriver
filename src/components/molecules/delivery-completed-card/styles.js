@@ -39,9 +39,10 @@ const styles = StyleSheet.create({
     width: mvs(20),
     height: mvs(20),
     borderRadius: mvs(10),
-    backgroundColor: colors.red,
+    backgroundColor: colors.green,
     marginLeft: mvs(20),
     alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 export default styles;

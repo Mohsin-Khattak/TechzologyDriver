@@ -17,6 +17,7 @@ import DeliveredModal from 'components/molecules/modals/delivered-modal';
 import {UTILS} from 'utils';
 import {
   getChangeStatus,
+  getConfirmDelivery,
   getOnTheWayDelivery,
   getPendingDelivery,
   getPickedUpDelivery,
@@ -30,6 +31,7 @@ const PendingDelivery = props => {
   const userId = userInfo?.id;
 
   const {picked, assign, pending} = props?.route?.params || {};
+
   const [deliveredModal, setDeliveredModal] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [order, setOrderId] = React.useState({});
@@ -46,7 +48,7 @@ const PendingDelivery = props => {
       const apiEndPoint = picked
         ? getPickedUpDelivery
         : assign
-        ? getPendingDelivery
+        ? getConfirmDelivery
         : pending
         ? getPendingDelivery
         : getOnTheWayDelivery;
@@ -93,6 +95,8 @@ const PendingDelivery = props => {
           ? 'Mark As Pickup'
           : pending
           ? 'Mark As Pick Up'
+          : picked
+          ? 'Mark As On The Way'
           : 'Mark As Delivered'
       }
       onPress={() =>
@@ -110,11 +114,11 @@ const PendingDelivery = props => {
               }
             : pending
             ? {
-                status: '3',
+                status: '0',
                 deliveryId: item?.id,
               }
             : {
-                status: '1',
+                status: '3',
                 deliveryId: item?.id,
               },
         )

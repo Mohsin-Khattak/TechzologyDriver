@@ -90,7 +90,7 @@ const OrderDetails = props => {
                 </View>
                 <Regular
                   color={colors.text}
-                  label={t('order_placed')}
+                  label={t('pending')}
                   fontSize={mvs(10)}
                 />
               </View>
@@ -100,7 +100,17 @@ const OrderDetails = props => {
                 </View>
                 <Regular
                   color={colors.text}
-                  label={t('confirmed')}
+                  label={t('confirm')}
+                  fontSize={mvs(10)}
+                />
+              </View>
+              <View style={{alignItems: 'center'}}>
+                <View style={styles.itemsContainer}>
+                  <Like />
+                </View>
+                <Regular
+                  color={colors.text}
+                  label={t('picked')}
                   fontSize={mvs(10)}
                 />
               </View>
@@ -128,6 +138,17 @@ const OrderDetails = props => {
             <View style={{paddingHorizontal: mvs(20), marginTop: mvs(20)}}>
               <View style={styles.line} />
               <Row>
+                <View
+                  style={[
+                    styles.circle,
+                    {
+                      borderRadius: 9,
+                      backgroundColor:
+                        status >= 0 ? colors.green : colors.halfGray,
+                    },
+                  ]}>
+                  {status >= 0 && <TickTwo />}
+                </View>
                 <View
                   style={[
                     styles.circle,
@@ -458,19 +479,29 @@ const OrderDetails = props => {
                     backgroundColor: colors.skyBlue,
                     borderRadius: mvs(15),
                   }}>
-                  <PrimaryButton
-                    onPress={() => setOrderConfirmationModal(true)}
-                    containerStyle={{width: '45%'}}
-                    title={'Cancle'}
-                  />
+                  {status === '3' || status === '2' ? (
+                    <></>
+                  ) : (
+                    <PrimaryButton
+                      onPress={() => setOrderConfirmationModal(true)}
+                      containerStyle={{width: '45%'}}
+                      title={'Cancel'}
+                    />
+                  )}
                   <PrimaryButton
                     onPress={() => setDeliveredModal(true)}
                     textStyle={{color: colors.primary}}
                     containerStyle={{
                       backgroundColor: colors.skyBlue,
-                      width: '55%',
+                      width: status === '3' || status === '2' ? '100%' : '55%',
                     }}
-                    title={'Mark As Delivered'}
+                    title={
+                      status === '2'
+                        ? 'Mark As On The Way'
+                        : status === '1'
+                        ? 'Mark As Picked Up'
+                        : 'Mark As Delivered'
+                    }
                   />
                 </Row>
               </>

@@ -8,6 +8,7 @@ import {View} from 'react-native';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {TickTwo} from 'assets/icons';
 
 const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
@@ -58,7 +59,7 @@ const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
               label={'Cash On Delivery'}
             />
             <View style={styles.cross}>
-              <Regular label={'X'} color={colors.white} />
+              <TickTwo />
             </View>
           </Row>
           <Row style={{marginTop: mvs(10)}}>

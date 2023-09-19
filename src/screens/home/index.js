@@ -34,6 +34,7 @@ const HomeTab = props => {
   const fetchData = async () => {
     try {
       const res = await getDashBoard(userId);
+      console.log(res);
       getData(res);
     } catch (error) {
       console.log('error=====>', UTILS.returnError());
@@ -136,7 +137,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={`${t('assigned')} ${'('}${data?.assigned}${')'} `}
+              label={`${t('assigned')} ${'('}${data?.confirmed}${')'} `}
             />
           </TouchableOpacity>
         </Row>
