@@ -125,6 +125,7 @@ export const getPickedUpDelivery = (userId: any, pageNumber: any) => {
 
 export const getChangeStatus = (values: any) => postData(URLS.dashboard.change_status, values)
 
+export const getDirection = (orderId: any) => getData(`${URLS.direction.get_direction}${orderId}`)
 
 
 

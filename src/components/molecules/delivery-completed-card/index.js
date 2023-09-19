@@ -70,12 +70,28 @@ const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
               title="View Details"
               onPress={onPress}
             />
-            <IconButton
-              Icon={<Read />}
-              title={'Delivered'}
-              textStyle={{marginLeft: mvs(5)}}
-              containerStyle={{width: '45%', height: mvs(40)}}
-            />
+            {item?.delivery_status === 'cancelled' ? (
+              <>
+                <View
+                  style={{
+                    width: '45%',
+                    height: mvs(40),
+                    backgroundColor: colors.primary,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: mvs(10),
+                  }}>
+                  <Regular color={colors.white} label={item?.delivery_status} />
+                </View>
+              </>
+            ) : (
+              <IconButton
+                Icon={<Read />}
+                title={'Delivered'}
+                textStyle={{marginLeft: mvs(5)}}
+                containerStyle={{width: '45%', height: mvs(40)}}
+              />
+            )}
           </Row>
         </View>
       </Row>

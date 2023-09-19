@@ -9,6 +9,7 @@ import { mvs } from 'config/metrices';
 
 import { useAppDispatch } from 'hooks/use-store';
 import { setLocation } from 'store/reducers/user-reducer';
+import Regular from 'typography/regular-text';
 
 interface CustomMapProps extends MapViewProps {
   children?: ReactNode;
@@ -72,7 +73,8 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
         onPress={onPressMap}
         style={style} initialRegion={initialRegion}  >
         {children}
-        {currentLocation && <Marker coordinate={currentLocation} />}
+        {currentLocation && <Marker coordinate={currentLocation} ></Marker>}
+
       </MapView>
       {/* <View style={[styles.currentLocationButton]}>
         <TouchableOpacity

@@ -40,4 +40,7 @@ export const URLS = {
     change_status: 'v2/delivery-boy/change-delivery-status',
     get_cancle_delivery: 'v2/delivery-boy/deliveries/cancelled/',
   },
+  direction: {
+    get_direction: 'v2/delivery-boy/get-direction/',
+  },
 };

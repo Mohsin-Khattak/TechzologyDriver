@@ -1,3 +1,4 @@
+import {colors} from 'config/colors';
 import React, {useEffect} from 'react';
 
 import MapViewDirections from 'react-native-maps-directions';
@@ -12,8 +13,8 @@ const MapDirections = props => {
       origin={origin}
       destination={destination}
       apikey={'AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98'}
-      strokeWidth={strokeWidth} // strokeWidth={3}
-      strokeColor={strokeColor} // strokeColor="hotpink"
+      strokeWidth={5} // strokeWidth={3}
+      strokeColor={colors.primary} // strokeColor="hotpink"
       onReady={handleGetDirections}
     />
   );
