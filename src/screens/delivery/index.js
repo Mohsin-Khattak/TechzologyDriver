@@ -10,17 +10,19 @@ import {Alert, TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 
-import {useTheme} from '@react-navigation/native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 import {ClanderTwo, DeliveryTwo} from 'assets/icons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import DeliveryCompletedCard from 'components/molecules/delivery-completed-card';
-import {UTILS} from 'utils';
-import {useAppSelector} from 'hooks/use-store';
-import {getCompletedDelivery} from 'services/api/auth-api-actions';
 import {Loader} from 'components/atoms/loader';
+import DeliveryCompletedCard from 'components/molecules/delivery-completed-card';
+import {useAppSelector} from 'hooks/use-store';
+import Entypo from 'react-native-vector-icons/Entypo';
+import {getCompletedDelivery} from 'services/api/auth-api-actions';
+import {UTILS} from 'utils';
 
 const DeliveryTab = props => {
   const colors = useTheme().colors;
+  const isFocus = useIsFocused();
+
   const {userInfo} = useAppSelector(s => s?.user);
   const userId = userInfo?.id;
 
@@ -80,7 +82,7 @@ const DeliveryTab = props => {
     if (pageNumber > 0 && !pageLoading) {
       fetchData(setPageLoading);
     }
-  }, [pageNumber, selectByDelivery, selectByPayment]);
+  }, [pageNumber, selectByDelivery, selectByPayment, isFocus]);
 
   const renderCompletedDelivery = ({item, index}) => (
     <DeliveryCompletedCard
@@ -96,7 +98,7 @@ const DeliveryTab = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('completed_delivery')} />
+      <AppHeader back title={t('Completed Delivery')} />
       <Row style={{paddingHorizontal: mvs(20)}}>
         <Row style={styles.innerContainer}>
           <TouchableOpacity

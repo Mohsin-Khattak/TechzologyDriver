@@ -6,7 +6,7 @@ import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 
-import {useTheme} from '@react-navigation/native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
 
 import Bold from 'typography/bold-text';
@@ -23,6 +23,8 @@ import {Loader} from 'components/atoms/loader';
 
 const MyEarningTab = props => {
   const colors = useTheme().colors;
+  const isFocus = useIsFocused();
+
   const {userInfo} = useAppSelector(s => s?.user);
   const userId = userInfo?.id;
 
@@ -83,7 +85,7 @@ const MyEarningTab = props => {
   }, [pageNumber]);
   React.useEffect(() => {
     fetchData();
-  }, []);
+  }, [isFocus]);
 
   const renderEarnings = ({item}) => (
     <EarningCard

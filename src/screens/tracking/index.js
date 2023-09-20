@@ -13,7 +13,7 @@ import CustomMap from 'components/atoms/custom-map';
 import MapDirections from 'components/atoms/custom-map-direction';
 import {Alert} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {getDirection} from 'services/api/auth-api-actions';
+import {getDirection, getDistance} from 'services/api/auth-api-actions';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import {Marker} from 'react-native-maps';
@@ -25,8 +25,9 @@ const Tracking = props => {
   const {orderId, pending} = props?.route?.params || {};
 
   const [loading, setLoading] = React.useState(false);
-  const [data, setData] = React.useState({});
+  const [data, setData] = React.useState();
   const userInfo = useAppSelector(s => s?.user);
+  const [totalDistance, setTotalDistance] = React.useState('');
 
   const latitude = userInfo?.location?.geoCode?.lat;
   const longitude = userInfo?.location?.geoCode?.lng;
@@ -44,7 +45,6 @@ const Tracking = props => {
     try {
       setLoading(true);
       const res = await getDirection(orderId, latitude, longitude);
-      // const res = await getDirection(orderId);
       setData(res);
     } catch (error) {
       console.log('Error in getProducts====>', error);
@@ -54,14 +54,27 @@ const Tracking = props => {
     }
   };
   React.useEffect(() => {
-    // Initial call
+    if (data) getTimeDistance();
+  }, [data]);
+  const getTimeDistance = async () => {
+    try {
+      const res = await getDistance(
+        origin?.latitude,
+        destination?.latitude,
+        origin?.longitude,
+        destination?.longitude,
+      );
+      setTotalDistance(res);
+    } catch (error) {
+      console.log('Error in getProducts====>', error);
+      Alert.alert('get Directioin Error', UTILS.returnError(error));
+    }
+  };
+  React.useEffect(() => {
     fetchDirection(setLoading);
-
-    // Set up an interval to recall the API every 25 seconds
     const intervalId = setInterval(() => {
       fetchDirection(() => {});
     }, 25000); // 25 seconds in milliseconds
-
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
@@ -75,7 +88,7 @@ const Tracking = props => {
         <ScrollView
           contentContainerStyle={{paddingHorizontal: mvs(20), flexGrow: 1}}>
           <View style={styles.mapContainer}>
-            <CustomMap>
+            <CustomMap latLng={origin}>
               <Marker coordinate={origin} />
               <Marker coordinate={destination}>
                 <ImageBackground
@@ -220,7 +233,7 @@ const Tracking = props => {
                 <Bold
                   color={colors.white}
                   fontSize={mvs(18)}
-                  label={'10.5 km'}
+                  label={`${totalDistance?.km} km`}
                 />
               </View>
             </View>
@@ -278,8 +291,14 @@ const Tracking = props => {
                             <Regular fontSize={mvs(12)} label={'Distance'} />
                             <Row style={{paddingRight: mvs(15)}}>
                               {/* <Regular fontSize={mvs(12)} label={'7 km/h'} /> */}
-                              <Regular fontSize={mvs(12)} label={'10 .5 km'} />
-                              <Regular fontSize={mvs(12)} label={'50 min'} />
+                              <Regular
+                                fontSize={mvs(12)}
+                                label={`${totalDistance?.km} km`}
+                              />
+                              <Regular
+                                fontSize={mvs(12)}
+                                label={totalDistance?.time}
+                              />
                             </Row>
                           </View>
                         </Row>

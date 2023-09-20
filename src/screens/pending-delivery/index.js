@@ -147,6 +147,7 @@ const PendingDelivery = props => {
       const res = await getChangeStatus(values);
       setDeliveredModal(false);
       console.log(res);
+      setData();
     } catch (error) {
       console.log('Error in getChangeStatus====>', error);
       Alert.alert('Change Statuss Error', UTILS.returnError(error));

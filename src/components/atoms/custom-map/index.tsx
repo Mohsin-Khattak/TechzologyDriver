@@ -1,22 +1,22 @@
-import React, { ReactNode } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import MapView, { LatLng, MapPressEvent, MapViewProps, Marker, Region } from 'react-native-maps';
-import { UTILS } from 'utils';
-import { GeoPosition } from 'react-native-geolocation-service';
-import { CurrentLocation } from 'assets/icons';
 import { colors } from 'config/colors';
 import { mvs } from 'config/metrices';
+import React, { ReactNode } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { GeoPosition } from 'react-native-geolocation-service';
+import MapView, { LatLng, MapPressEvent, MapViewProps, Marker } from 'react-native-maps';
+import { UTILS } from 'utils';
 
 import { useAppDispatch } from 'hooks/use-store';
-import { setLocation } from 'store/reducers/user-reducer';
-import Regular from 'typography/regular-text';
+import { setLocation } from '../../../store/reducers/user-reducer';
 
 interface CustomMapProps extends MapViewProps {
   children?: ReactNode;
   onPress: (e: any) => void;
+  latLng: any;
 }
 
 const CustomMap: React.FC<CustomMapProps> = ({ children,
+  latLng,
   initialRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
@@ -35,7 +35,11 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
       longitudeDelta: 0.0421,
     }, 1000);
   };
-
+  React.useEffect(() => {
+    if (latLng) {
+      handleRegionChange(latLng);
+    }
+  }, [latLng])
   const handleCurrentLocationPress = () => {
     // Logic to retrieve and set the current location
     // For example, using Geolocation API or a location service library

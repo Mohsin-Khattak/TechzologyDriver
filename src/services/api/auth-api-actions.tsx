@@ -127,6 +127,28 @@ export const getChangeStatus = (values: any) => postData(URLS.dashboard.change_s
 
 export const getDirection = (orderId: any, latitude: any, longitude: any) => getData(`${URLS.direction.get_direction}${orderId}?latitude=${latitude}&longitude=${longitude}`)
 
+export const getDistance = async (lat1: any, lat2: any, lon1: any, lon2: any) => {
+  console.log("lat1, lat2, lon1, lon2", lat1, lat2, lon1, lon2);
+
+  try {
+    var km = 1;
+    let time = 0;
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${lat1},${lon1}&destinations=${lat2},${lon2}&key=AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98`
+    );
+    if (response?.data?.status === "OK") {
+      console.log("Distance is ");
+      km = response?.data?.rows[0]?.elements[0]?.distance?.value / 1000;
+      time = response?.data?.rows[0]?.elements[0]?.duration?.text;
+
+    }
+    return { km, time };
+
+  } catch (error) {
+    throw new Error(UTILS.returnError(error));
+  }
+}
+
 
 
 
