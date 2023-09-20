@@ -26,7 +26,7 @@ const DeliveryTab = props => {
   const {userInfo} = useAppSelector(s => s?.user);
   const userId = userInfo?.id;
 
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [select, setSelect] = React.useState(true);
   const [selectByPayment, setSelectByPayment] = React.useState('');
   const [selectByDelivery, setSelectByDelivery] = React.useState('');
@@ -98,7 +98,7 @@ const DeliveryTab = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('Completed Delivery')} />
+      <AppHeader back title={t('completed_delivery')} />
       <Row style={{paddingHorizontal: mvs(20)}}>
         <Row style={styles.innerContainer}>
           <TouchableOpacity
@@ -161,7 +161,7 @@ const DeliveryTab = props => {
                 <Regular
                   style={{color: colors.text, marginTop: mvs(10)}}
                   fontSize={mvs(12)}
-                  label={t('This Week')}
+                  label={t('This_Week')}
                 />
               </TouchableOpacity>
               <TouchableOpacity
@@ -172,7 +172,7 @@ const DeliveryTab = props => {
                 <Regular
                   style={{color: colors.text, marginTop: mvs(10)}}
                   fontSize={mvs(12)}
-                  label={t('This Month')}
+                  label={t('This_Month')}
                 />
               </TouchableOpacity>
             </View>
@@ -216,7 +216,7 @@ const DeliveryTab = props => {
                   setSelectByDelivery('ALL');
                   setDeliverySelect(!deliverySelect);
                 }}>
-                <Regular color={colors.text} label={t('ALL')} />
+                <Regular color={colors.text} label={t('all')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -236,7 +236,7 @@ const DeliveryTab = props => {
                 <Regular
                   style={{color: colors.text, marginTop: mvs(10)}}
                   fontSize={mvs(12)}
-                  label={t('NON COD')}
+                  label={t('NON_COD')}
                 />
               </TouchableOpacity>
             </View>

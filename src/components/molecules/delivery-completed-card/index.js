@@ -9,6 +9,7 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 import {TickTwo} from 'assets/icons';
+import {t} from 'i18next';
 
 const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
@@ -21,7 +22,7 @@ const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
           justifyContent: 'flex-start',
         }}>
         <View style={styles.contentContainer}>
-          <Regular label={'Order Code'} />
+          <Regular label={t('order_code')} />
           <Regular style={{marginTop: mvs(5)}} label={item?.code} />
           <Row style={{alignItems: 'center'}}>
             <Regular
@@ -46,7 +47,7 @@ const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
               fontSize: mvs(14),
             }}
             // label={`${'Payment Status -'} ${item?.payment_status}`}
-            label={`${'Payment Status '}`}
+            label={`${item?.payment_status}`}
           />
 
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
@@ -67,7 +68,7 @@ const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
               containerStyle={styles.viewDetailsBtn}
               Icon={<ViewDetails />}
               textStyle={{color: colors.primary, marginLeft: mvs(5)}}
-              title="View Details"
+              title={t('view_details')}
               onPress={onPress}
             />
             {item?.delivery_status === 'cancelled' ? (
@@ -87,7 +88,7 @@ const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
             ) : (
               <IconButton
                 Icon={<Read />}
-                title={'Delivered'}
+                title={t('delivered')}
                 textStyle={{marginLeft: mvs(5)}}
                 containerStyle={{width: '45%', height: mvs(40)}}
               />

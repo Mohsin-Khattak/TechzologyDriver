@@ -76,7 +76,7 @@ const UserTab = props => {
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('Account')} />
       <KeyboardAvoidScrollview
-        contentContainerStyle={{paddingBottom: mvs(30), marginTop: mvs(50)}}>
+        contentContainerStyle={{paddingBottom: mvs(40), marginTop: mvs(50)}}>
         <ImageBackground
           source={{
             uri: user?.avatar_original, //'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg',

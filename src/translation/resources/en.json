@@ -145,6 +145,33 @@
   "dashboard":"Dashboard",
   "my_collection":"My Collection",
   "assign":"Assigned",
+  "change_language":"Change Language",
+  "en":"English",
+  "ar":"Arabic",
+  "profile":"Profile",
+  "Logout":"LogOut",
+  "Account":"Account",
+  "Earnings":"Earnings",
+  "today":"Today",
+  "yesterday":"Yesterday",
+  "Today":"Today",
+  "All":"All",
+  "This_Week":"This Week",
+  "This_Month":"This Month",
+  "COD":"COD",
+  "NON_COD":"NON COD",
+  "view_details":"View Details",
+  "confirm":"Confirm",
+  "pending":"Pending",
+  "collection":"Collection",
+  "get_direction":"Get Direction",
+  "mark_as_pickup":"Mark As Pickup",
+  "mark_as_on_the_way":"mark_as_on_the_way",
+  "mark_as_delivered":"Mark As Delivered"
+  
+  
+  
+  
   
 
 

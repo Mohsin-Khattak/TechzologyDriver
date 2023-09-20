@@ -96,7 +96,7 @@ const Collection = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('Collection')} />
+      <AppHeader back title={t('collection')} />
       {loading ? (
         <Loader />
       ) : (
@@ -107,7 +107,7 @@ const Collection = props => {
                 <Regular
                   fontSize={mvs(12)}
                   color={colors.white}
-                  label={t('today')}
+                  label={t('Today')}
                 />
                 <Bold
                   style={{marginVertical: mvs(5)}}

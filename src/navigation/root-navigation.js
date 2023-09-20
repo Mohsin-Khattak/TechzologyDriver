@@ -13,6 +13,7 @@ import Collection from 'screens/collections';
 import PendingDelivery from 'screens/pending-delivery';
 import Tracking from 'screens/tracking';
 import CancelledDelivery from 'screens/cancelled';
+import LanguageScreen from 'screens/language-screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="Collection" component={Collection} />
           <Stack.Screen name="PendingDelivery" component={PendingDelivery} />
           <Stack.Screen name="Tracking" component={Tracking} />
+          <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
           <Stack.Screen
             name="CancelledDelivery"
             component={CancelledDelivery}

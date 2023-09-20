@@ -106,7 +106,7 @@ export const TabBar = props => {
   return (
     <Tab.Navigator
       initialRouteName={initialRoute || 'Home'}
-      screenOptions={{headerShown: false}}
+      screenOptions={{headerShown: false, unmountOnBlur: true}}
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Home" component={HomeTab} />
       <Tab.Screen name="Delivery" component={DeliveryTab} />

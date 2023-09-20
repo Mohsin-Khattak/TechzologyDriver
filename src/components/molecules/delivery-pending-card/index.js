@@ -14,6 +14,7 @@ import {View} from 'react-native';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {t} from 'i18next';
 
 const DeliveryPendingCard = ({
   item,
@@ -35,7 +36,7 @@ const DeliveryPendingCard = ({
           justifyContent: 'flex-start',
         }}>
         <View style={styles.contentContainer}>
-          <Regular label={'Order Code'} />
+          <Regular label={t('order_code')} />
           <Regular style={{marginTop: mvs(5)}} label={item?.code} />
           <Row style={{alignItems: 'center'}}>
             <Regular
@@ -59,7 +60,7 @@ const DeliveryPendingCard = ({
               color: colors.text,
               fontSize: mvs(14),
             }}
-            label={`${'Payment Status -'} ${item?.payment_status}`}
+            label={`${t('payment_status')} - ${item?.payment_status}`}
             // label={`${'Payment Status '}`}
           />
 
@@ -79,7 +80,7 @@ const DeliveryPendingCard = ({
           <IconButton
             onPress={onPressDirection}
             Icon={<AppLocation />}
-            title={'Get Direction'}
+            title={t('get_direction')}
             textStyle={{marginLeft: mvs(10)}}
             containerStyle={{
               height: mvs(40),
@@ -96,7 +97,7 @@ const DeliveryPendingCard = ({
                 marginLeft: mvs(5),
                 fontSize: mvs(12),
               }}
-              title="View Details"
+              title={t('view_details')}
               onPress={onPress}
             />
             <IconButton

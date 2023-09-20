@@ -125,7 +125,52 @@
   "reviews":"التعليقات",
   "vendor_policy":"سياسة البائع",
   "policy":"سياسة العائدات",
-  "support_policy":"سياسة الدعم"
+  "support_policy":"سياسة الدعم",
+
+    //delivery boy
+
+    "login_in_to_techzology_delivery_boy":"تسجيل الدخول إلى فتى تسليم techzology",
+    "or_login_with_phone_number":"أو قم بتسجيل الدخول باستخدام رقم الهاتف",
+    "fingind_problem":"إذا وجدت أي مشكلة أثناء تسجيل الدخول يرجى الاتصال بالمسؤول",
+    "completed_delivery":"تسليم مكتمل",
+    "pending_delivery":"تسليم انتظار",
+    "total_collected":"مجموع المجمعة",
+    "earnings":"الأرباح",
+    "cancelled_delivery":"تم إلغاء التسليم",
+    "on_the_way":"علي الطريق",
+    "assigned":"مُكَلَّف",
+    "picked":"اختار",
+    "dashboard":"لوحة القيادة",
+    "my_collection":"مجموعتي",
+    "assign":"مُكَلَّف",
+    "change_language":"تغيير اللغة",
+    "en":"إنجليزي",
+    "ar":"عربي",
+    "profile":"حساب تعريفي",
+    "Logout":"تسجيل خروج",
+    "Account":"حساب",
+    "Earnings":"الأرباح",
+  "yesterday":"أمس",
+  "Today":"اليوم",
+  "All":"الجميع",
+  "This_Week":"هذا الاسبوع",
+  "This_Month":"هذا الشهر",
+  "COD":"سمك القد",
+  "NON_COD":"غير COD",
+  "view_details":"عرض التفاصيل",
+  "confirm":"يتأكد",
+  "pending":"قيد الانتظار",
+  "collection":"مجموعة",
+  "get_direction":"احصل على اتجاه",
+  "mark_as_pickup":"وضع علامة على أنها بيك اب",
+  "mark_as_on_the_way":"علامة على الطريق",
+  "mark_as_delivered":"وضع علامة تم التسليم"
+  
+
+
+  
+    
+    
 
 
 

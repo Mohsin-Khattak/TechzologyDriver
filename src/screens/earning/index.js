@@ -30,7 +30,7 @@ const MyEarningTab = props => {
 
   const [data, getData] = React.useState({});
   const [history, getHistory] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
 
   const [pageLoading, setPageLoading] = React.useState(false);
   const [pageNumber, setPageNumber] = React.useState(1);

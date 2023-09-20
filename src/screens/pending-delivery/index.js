@@ -94,12 +94,12 @@ const PendingDelivery = props => {
       }
       markas={
         assign
-          ? 'Mark As Pickup'
+          ? t('mark_as_pickup')
           : pending
-          ? 'Mark As Pick Up'
+          ? t('mark_as_pickup')
           : picked
-          ? 'Mark As On The Way'
-          : 'Mark As Delivered'
+          ? t('mark_as_on_the_way')
+          : t('mark_as_delivered')
       }
       onPress={() =>
         navigate(
@@ -183,25 +183,25 @@ const PendingDelivery = props => {
               <Regular
                 fontSize={mvs(12)}
                 style={{marginLeft: mvs(10)}}
-                label={`Assigned (${data?.data?.length || 0})`}
+                label={`${t('assigned')}(${data?.data?.length || 0})`}
               />
             ) : picked ? (
               <Regular
                 fontSize={mvs(12)}
                 style={{marginLeft: mvs(10)}}
-                label={`Picked (${data?.data?.length || 0})`}
+                label={`${t('picked')} (${data?.data?.length || 0})`}
               />
             ) : pending ? (
               <Regular
                 fontSize={mvs(12)}
                 style={{marginLeft: mvs(10)}}
-                label={`Pending Delivery (${data?.data?.length || 0})`}
+                label={`${t('pending_delivery')}(${data?.data?.length || 0})`}
               />
             ) : (
               <Regular
                 fontSize={mvs(12)}
                 style={{marginLeft: mvs(10)}}
-                label={`On The Way (${data?.data?.length || 0})`}
+                label={`${t('on_the_way')} (${data?.data?.length || 0})`}
               />
             )}
           </Row>

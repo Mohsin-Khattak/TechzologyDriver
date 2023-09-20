@@ -21,6 +21,7 @@ import {logout} from 'services/api/auth-api-actions';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
+import {Language} from 'assets/icons';
 
 const CustomDrawer = props => {
   const colors = useTheme().colors;
@@ -122,6 +123,13 @@ const CustomDrawer = props => {
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
           Icon={<UserDrawer />}
+        />
+        <IconButton
+          onPress={() => navigate('LanguageScreen')}
+          title={t('change_language')}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
+          Icon={<Language />}
         />
 
         <IconButton

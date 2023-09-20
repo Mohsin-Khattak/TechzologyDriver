@@ -25,10 +25,10 @@ import {useAppSelector} from 'hooks/use-store';
 import {Loader} from 'components/atoms/loader';
 
 const HomeTab = props => {
-  const isFocus = useIsFocused();
   const {userInfo} = useAppSelector(s => s?.user);
   const userId = userInfo?.id;
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const isFocus = useIsFocused();
 
   const colors = useTheme().colors;
   const [data, getData] = React.useState({});
@@ -46,7 +46,7 @@ const HomeTab = props => {
     }
   };
   React.useEffect(() => {
-    fetchData();
+    if (isFocus) fetchData();
   }, [isFocus]);
 
   return (
