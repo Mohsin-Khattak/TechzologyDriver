@@ -89,7 +89,9 @@ const PendingDelivery = props => {
       setDeliveredModal={setDeliveredModal}
       setOrderId={setOrderId}
       item={item}
-      onPressDirection={() => navigate('Tracking', {orderId: item?.id})}
+      onPressDirection={() =>
+        navigate('Tracking', {orderId: item?.id, pending: pending})
+      }
       markas={
         assign
           ? 'Mark As Pickup'

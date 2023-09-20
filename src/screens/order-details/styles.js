@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     marginLeft: mvs(5),
   },
   mapContainer: {
-    height: mvs(200),
+    height: mvs(300),
     borderWidth: 1,
     borderColor: colors.primary,
     marginTop: mvs(10),

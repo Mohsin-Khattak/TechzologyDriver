@@ -18,28 +18,33 @@ import OrderConfirmationModal from 'components/molecules/modals/order-conformati
 import {Alert} from 'react-native';
 import {
   cancleDelivery,
+  getChangeStatus,
   getCompletedDeliveryDetails,
   getDeliveryAmount,
 } from 'services/api/auth-api-actions';
 import Medium from 'typography/medium-text';
 import {UTILS} from 'utils';
 import {Loader} from 'components/atoms/loader';
+import {useAppSelector} from 'hooks/use-store';
 
 const OrderDetails = props => {
   const colors = useTheme().colors;
 
   const {status, order, deliveryId} = props?.route?.params || {};
-
+  console.log('check status=======>', status);
+  const {userInfo} = useAppSelector(s => s?.user);
+  const userId = userInfo?.id;
   const [orderConformationModal, setOrderConfirmationModal] =
     React.useState(false);
   const [deliveredModal, setDeliveredModal] = React.useState(false);
+  const [changestatusLoading, setChangeStatusLoading] = React.useState(false);
   const origin = {latitude: 31.560249, longitude: 74.362284};
   const destination = {latitude: 31.556014, longitude: 74.354795};
   const [loading, setLoading] = React.useState(false);
   const [completeDeliveryHistory, setCompleteDeliveryHistory] = React.useState(
     [],
   );
-
+  const [path, setPath] = React.useState([]);
   const orderId = completeDeliveryHistory?.order_details?.id;
 
   const [amount, setAmount] = React.useState({});
@@ -62,11 +67,46 @@ const OrderDetails = props => {
       const amountRes = await getDeliveryAmount(deliveryId);
       setAmount(amountRes);
       setCompleteDeliveryHistory(res);
+      const data = res?.DeliveryBoyPath?.map(x => ({
+        latitude: x?.lat * 1,
+        longitude: x?.lng * 1,
+      }));
+      setPath(data || []);
     } catch (error) {
       console.log('Error in getProducts====>', error);
       Alert.alert('Products Error', UTILS.returnError(error));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const values = {
+    order_id: order?.id,
+    status:
+      status === '0'
+        ? 'picked_up'
+        : status === '1'
+        ? 'picked_up'
+        : status === '2'
+        ? 'on_the_way'
+        : 'delivered',
+    delivery_boy_id: userId,
+    payment_type:
+      complete?.order_details?.payment_type === 'Cash On Delivery'
+        ? 'cash_on_delivery'
+        : '',
+  };
+  const ChangeStatus = async () => {
+    try {
+      setChangeStatusLoading(true);
+      const res = await getChangeStatus(values);
+      setDeliveredModal(false);
+      console.log(res);
+    } catch (error) {
+      console.log('Error in getChangeStatus====>', error);
+      Alert.alert('Change Statuss Error', UTILS.returnError(error));
+    } finally {
+      setChangeStatusLoading(false);
     }
   };
 
@@ -366,7 +406,11 @@ const OrderDetails = props => {
             {status === '4' ? (
               <View style={styles.mapContainer}>
                 <CustomMap>
-                  <MapDirections origin={origin} destination={destination} />
+                  <MapDirections
+                    waypoints={path}
+                    origin={origin}
+                    destination={destination}
+                  />
                 </CustomMap>
               </View>
             ) : (
@@ -517,6 +561,11 @@ const OrderDetails = props => {
       <DeliveredModal
         onClose={() => setDeliveredModal(false)}
         visible={deliveredModal}
+        changestatusLoading={changestatusLoading}
+        setChangeStatusLoading={setChangeStatusLoading}
+        onChangeStatus={() => {
+          ChangeStatus(), setChangeStatusLoading(true);
+        }}
       />
     </View>
   );

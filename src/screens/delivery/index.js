@@ -96,7 +96,7 @@ const DeliveryTab = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('Completed Delivery')} />
+      <AppHeader back title={t('completed_delivery')} />
       <Row style={{paddingHorizontal: mvs(20)}}>
         <Row style={styles.innerContainer}>
           <TouchableOpacity

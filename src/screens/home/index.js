@@ -113,7 +113,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={`${t('on_the_way')} ${'('}${data?.on_the_way}${')'} `}
+              label={`${t('on_the_way')} (${data?.on_the_way || 0})`}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -125,7 +125,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={`${t('picked')} ${'('}${data?.picked}${')'} `}
+              label={`${t('picked')} (${data?.picked || 0})`}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -137,7 +137,7 @@ const HomeTab = props => {
             <Regular
               color={colors.white}
               fontSize={mvs(12)}
-              label={`${t('assigned')} ${'('}${data?.confirmed}${')'} `}
+              label={`${t('assigned')} (${data?.confirmed || 0})`}
             />
           </TouchableOpacity>
         </Row>

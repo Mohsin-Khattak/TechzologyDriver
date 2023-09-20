@@ -22,14 +22,14 @@ import {useAppSelector} from 'hooks/use-store';
 import {UTILS} from 'utils';
 
 const Tracking = props => {
-  const {orderId} = props?.route?.params || {};
+  const {orderId, pending} = props?.route?.params || {};
 
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState({});
-  // console.log('get direction==========>', data?.warehouse, orderId);
   const userInfo = useAppSelector(s => s?.user);
-  // const location = UTILS._returnAddress();
-  console.log('get direction==========>', userInfo?.location?.fulladdress);
+
+  const latitude = userInfo?.location?.geoCode?.lat;
+  const longitude = userInfo?.location?.geoCode?.lng;
 
   const origin = {
     latitude: data?.warehouse?.latitude * 1 || 37.78825,
@@ -39,20 +39,31 @@ const Tracking = props => {
     latitude: data?.customerLatLng?.latitude * 1 || 37.78825,
     longitude: data?.customerLatLng?.longitude * 1 || -122.4324,
   };
-  const fetchDirection = async () => {
+
+  const fetchDirection = async setLoading => {
     try {
       setLoading(true);
-      const res = await getDirection(orderId);
+      const res = await getDirection(orderId, latitude, longitude);
+      // const res = await getDirection(orderId);
       setData(res);
     } catch (error) {
       console.log('Error in getProducts====>', error);
-      Alert.alert('Products Error', UTILS.returnError(error));
+      Alert.alert('get Directioin Error', UTILS.returnError(error));
     } finally {
       setLoading(false);
     }
   };
   React.useEffect(() => {
-    fetchDirection();
+    // Initial call
+    fetchDirection(setLoading);
+
+    // Set up an interval to recall the API every 25 seconds
+    const intervalId = setInterval(() => {
+      fetchDirection(() => {});
+    }, 25000); // 25 seconds in milliseconds
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -237,9 +248,16 @@ const Tracking = props => {
                             />
                           </View>
                           <View style={{flex: 1}}>
-                            {/* <Regular label={'Techzology Ecommerce '} /> */}
-                            {/* <Regular label={'WareHouse'} /> */}
-                            <Regular label={userInfo?.location?.fulladdress} />
+                            {pending ? (
+                              <>
+                                <Regular label={'Techzology Ecommerce'} />
+                                <Regular label={'WareHouse'} />
+                              </>
+                            ) : (
+                              <Regular
+                                label={userInfo?.location?.fulladdress}
+                              />
+                            )}
                           </View>
                         </Row>
                       </Row>
