@@ -166,8 +166,19 @@
   "collection":"Collection",
   "get_direction":"Get Direction",
   "mark_as_pickup":"Mark As Pickup",
-  "mark_as_on_the_way":"mark_as_on_the_way",
-  "mark_as_delivered":"Mark As Delivered"
+  "mark_as_on_the_way":"Mark As On The Way",
+  "mark_as_delivered":"Mark As Delivered",
+  "amount_to_calculate":"Amount To Collect",
+  "cancel":"Cancel",
+  "distance":"Distance",
+  "delivery_boy":"Delivery Boy",
+  "time_line":"Time Line",
+  "teczology_ecommerce":"Techzology Ecommerce",
+  "warehouse":"WareHouse",
+  "customer_address":"Customer Address",
+  "Are_You_Sure":"Are You Sure To Mark This As Delivered ?"  
+  
+
   
   
   

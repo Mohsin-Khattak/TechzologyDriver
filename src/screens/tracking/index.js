@@ -68,6 +68,8 @@ const Tracking = props => {
     } catch (error) {
       console.log('Error in getProducts====>', error);
       Alert.alert('get Directioin Error', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
     }
   };
   React.useEffect(() => {
@@ -144,6 +146,9 @@ const Tracking = props => {
               </Row>
               <Row>
                 <IconButton
+                  onPress={() =>
+                    UTILS.dialPhone(data?.customerAddress?.phone || '')
+                  }
                   Icon={
                     <Ionicons
                       name={'call-outline'}
@@ -156,23 +161,10 @@ const Tracking = props => {
                   containerStyle={styles.chatBtn}
                   title={t('call')}
                 />
-                {/* <IconButton
-                  Icon={
-                    <MaterialIcons
-                      name={'message'}
-                      size={13}
-                      color={colors.white}
-                      style={{marginRight: mvs(5)}}
-                    />
-                  }
-                  textStyle={{fontSize: mvs(14)}}
-                  containerStyle={styles.messageBtn}
-                  title={t('chat')}
-                /> */}
               </Row>
             </Row>
             <Row>
-              <View style={{flex: 1}}>
+              <View style={{flex: 1, alignItems: 'center'}}>
                 <Regular
                   label={t('email')}
                   fontSize={mvs(12)}
@@ -184,7 +176,7 @@ const Tracking = props => {
                   color={colors.darkBlack}
                 />
               </View>
-              <View style={{flex: 1}}>
+              <View style={{flex: 1, alignItems: 'center'}}>
                 <Regular
                   label={t('address')}
                   fontSize={mvs(12)}
@@ -196,7 +188,7 @@ const Tracking = props => {
                   color={colors.darkBlack}
                 />
               </View>
-              <View style={{flex: 1}}>
+              <View style={{flex: 1, alignItems: 'center'}}>
                 <Regular
                   label={t('city')}
                   fontSize={mvs(12)}
@@ -208,18 +200,6 @@ const Tracking = props => {
                   color={colors.darkBlack}
                 />
               </View>
-              {/* <View style={{flex: 1}}>
-                <Regular
-                  label={t('driver_rate')}
-                  fontSize={mvs(12)}
-                  color={colors.darkBlack}
-                />
-                <Regular
-                  label={'5'}
-                  fontSize={mvs(12)}
-                  color={colors.darkBlack}
-                />
-              </View> */}
             </Row>
           </View>
           <View style={styles.trackContainer}>
@@ -237,37 +217,39 @@ const Tracking = props => {
                 />
               </View>
             </View>
-            <View style={{paddingHorizontal: mvs(20)}}>
+            <View style={{paddingHorizontal: mvs(20), flex: 1}}>
               <Regular label={t('time_line')} />
               <Row>
-                <View>
-                  <View style={{height: mvs(120)}}>
+                <View style={{flex: 1}}>
+                  <View>
                     <View style={styles.lineVertical} />
                     <View
                       style={{
                         justifyContent: 'space-between',
-                        height: mvs(120),
+                        // height: mvs(120),
+                        gap: mvs(20),
                       }}>
                       <Row
                         style={{
                           alignItems: 'flex-start',
                         }}>
                         <View style={styles.circleOne} />
-                        <Row style={{marginLeft: mvs(15)}}>
-                          <View style={{width: mvs(80)}}>
-                            <Regular
-                              style={{fontSize: mvs(12)}}
-                              label={'Delivery Boy'}
-                            />
-                          </View>
+                        <Row style={{marginLeft: mvs(15), gap: mvs(10)}}>
+                          <Regular
+                            style={{fontSize: mvs(12)}}
+                            label={t('delivery_boy')}
+                          />
+
                           <View style={{flex: 1}}>
                             {pending ? (
                               <>
-                                <Regular label={'Techzology Ecommerce'} />
-                                <Regular label={'WareHouse'} />
+                                <Regular label={t('teczology_ecommerce')} />
+                                <Regular label={t('warehouse')} />
                               </>
                             ) : (
                               <Regular
+                                numberOfLines={2}
+                                fontSize={12}
                                 label={userInfo?.location?.fulladdress}
                               />
                             )}
@@ -280,17 +262,10 @@ const Tracking = props => {
                         }}>
                         <View style={styles.circleOne} />
                         <Row style={{marginLeft: mvs(15), flex: 1}}>
-                          <View style={{width: mvs(80)}}>
-                            {/* <Regular
-                              style={{fontSize: mvs(12)}}
-                              label={'on the way'}
-                            /> */}
-                          </View>
+                          <View style={{width: mvs(80)}}></View>
                           <View style={{flex: 1}}>
-                            {/* <Regular label={'driving'} /> */}
-                            <Regular fontSize={mvs(12)} label={'Distance'} />
+                            <Regular fontSize={mvs(12)} label={t('distance')} />
                             <Row style={{paddingRight: mvs(15)}}>
-                              {/* <Regular fontSize={mvs(12)} label={'7 km/h'} /> */}
                               <Regular
                                 fontSize={mvs(12)}
                                 label={`${totalDistance?.km} km`}
@@ -313,15 +288,19 @@ const Tracking = props => {
                           style={{
                             alignItems: 'flex-end',
                             marginLeft: mvs(15),
+                            flex: 1,
                           }}>
                           <View style={{width: mvs(80)}}>
                             <Regular
                               style={{fontSize: mvs(12)}}
-                              label={'Customer Address'}
+                              label={t('customer_address')}
                             />
                           </View>
                           <View style={{flex: 1}}>
-                            <Regular label={data?.customerAddress?.address} />
+                            <Regular
+                              fontSize={mvs(12)}
+                              label={data?.customerAddress?.address}
+                            />
                           </View>
                         </Row>
                       </Row>

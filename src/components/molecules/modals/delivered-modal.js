@@ -39,7 +39,7 @@ const DeliveredModal = ({
         <Medium
           color={colors.text}
           fontSize={mvs(12)}
-          label={t('Are You Sure To Mark This As Delivered ?')}
+          label={t('Are_You_Sure')}
         />
         <View style={styles.otp}>
           <Row>

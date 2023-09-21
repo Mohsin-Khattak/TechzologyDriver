@@ -164,7 +164,19 @@
   "get_direction":"احصل على اتجاه",
   "mark_as_pickup":"وضع علامة على أنها بيك اب",
   "mark_as_on_the_way":"علامة على الطريق",
-  "mark_as_delivered":"وضع علامة تم التسليم"
+  "mark_as_delivered":"وضع علامة تم التسليم",
+  "amount_to_calculate":"المبلغ المطلوب جمعه",
+  "cancel":"يلغي",
+  "shipping_cost":"تكلفة الشحن",
+  "distance":"مسافة",
+  "delivery_boy":"فتى التوصيل",
+  "time_line":"الجدول الزمني",
+  "teczology_ecommerce":"التجارة الإلكترونية تيكزولي",
+  "warehouse":"مستودع",
+  "customer_address":"عنوان العميل",
+  "Are_You_Sure":"هل أنت متأكد من وضع علامة على هذا بأنه تم التسليم؟"  
+
+
   
 
 

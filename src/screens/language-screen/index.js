@@ -11,6 +11,7 @@ import {UTILS} from 'utils';
 
 import RNRestart from 'react-native-restart';
 import styles from './styles';
+import AppHeader from 'components/atoms/headers/app-header';
 const LanguageScreen = props => {
   const user = useAppSelector(s => s?.user);
   const userInfo = user?.userInfo;
@@ -46,7 +47,7 @@ const LanguageScreen = props => {
   };
   return (
     <View style={styles.container}>
-      <Header1x2x back title={t('change_language')} />
+      <AppHeader back title={t('change_language')} />
       <View style={styles.body}>
         <PrimaryButton
           disabled={language === 'en'}

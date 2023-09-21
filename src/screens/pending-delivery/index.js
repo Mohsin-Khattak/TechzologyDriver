@@ -41,10 +41,10 @@ const PendingDelivery = props => {
   const [data, setData] = React.useState([]);
   const [changestatusLoading, setChangeStatusLoading] = React.useState(false);
 
-  const fetchData = async setDataLoading => {
+  const fetchData = async () => {
     try {
       setLoading(true);
-      setDataLoading(true);
+      // setDataLoading(true);
       const apiEndPoint = picked
         ? getPickedUpDelivery
         : assign
@@ -67,7 +67,7 @@ const PendingDelivery = props => {
       console.log('Error in getProducts====>', error);
       Alert.alert('Products Error', UTILS.returnError(error));
     } finally {
-      setDataLoading(false);
+      // setDataLoading(false);
       setLoading(false);
     }
   };
@@ -146,8 +146,7 @@ const PendingDelivery = props => {
       setChangeStatusLoading(true);
       const res = await getChangeStatus(values);
       setDeliveredModal(false);
-      console.log(res);
-      setData();
+      fetchData()
     } catch (error) {
       console.log('Error in getChangeStatus====>', error);
       Alert.alert('Change Statuss Error', UTILS.returnError(error));

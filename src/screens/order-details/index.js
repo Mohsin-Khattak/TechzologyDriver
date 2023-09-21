@@ -514,7 +514,7 @@ const OrderDetails = props => {
                     borderRadius: mvs(15),
                   }}>
                   <Row>
-                    <Regular label={'Amount To Collect'} />
+                    <Regular label={t('amount_to_calculate')} />
                     <Regular label={`${'$'}${amount?.price}`} />
                   </Row>
                 </View>
@@ -529,7 +529,7 @@ const OrderDetails = props => {
                     <PrimaryButton
                       onPress={() => setOrderConfirmationModal(true)}
                       containerStyle={{width: '45%'}}
-                      title={'Cancel'}
+                      title={t('cancel')}
                     />
                   )}
                   <PrimaryButton
@@ -541,10 +541,10 @@ const OrderDetails = props => {
                     }}
                     title={
                       status === '2'
-                        ? 'Mark As On The Way'
+                        ? t('mark_as_on_the_way')
                         : status === '1'
-                        ? 'Mark As Picked Up'
-                        : 'Mark As Delivered'
+                        ? t('mark_as_pickup')
+                        : t('mark_as_delivered')
                     }
                   />
                 </Row>
