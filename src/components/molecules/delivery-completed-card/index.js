@@ -13,7 +13,7 @@ import {t} from 'i18next';
 
 const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
-
+  console.log(item);
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <Row
@@ -57,7 +57,7 @@ const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
                 fontSize: mvs(12),
                 marginTop: mvs(5),
               }}
-              label={'Cash On Delivery'}
+              label={item?.delivery_status}
             />
             <View style={styles.cross}>
               <TickTwo />

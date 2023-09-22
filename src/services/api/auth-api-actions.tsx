@@ -82,6 +82,7 @@ export const resendVerifyOtp = (values: any) => postData(URLS.auth.resend_otp_ve
 export const forgotPassword = (values: any) => postData(URLS.auth.forget_password, values);
 export const resendPasswordCode = (values: any) => postData(URLS.auth.resend_password_code, values);
 export const changePassword = (values: any) => postData(URLS.auth.change_password, values);
+export const isActiveStatus = (values: any) => postData(URLS.auth.user_active, values);
 export const logout = () => getData(URLS.auth.logout);
 
 

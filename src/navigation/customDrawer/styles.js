@@ -34,5 +34,11 @@ const styles = StyleSheet.create({
     marginLeft: mvs(15),
     color: colors.darkBlack,
   },
+  activeInnerConatiner: {
+    width: mvs(40),
+    height: mvs(10),
+    backgroundColor: colors.border,
+    borderRadius: mvs(5),
+  },
 });
 export default styles;

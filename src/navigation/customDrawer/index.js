@@ -17,11 +17,16 @@ import {mvs} from 'config/metrices';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {t} from 'i18next';
 import {navigate, resetStack} from 'navigation/navigation-ref';
-import {logout} from 'services/api/auth-api-actions';
+import {isActiveStatus, logout} from 'services/api/auth-api-actions';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
 import {Language} from 'assets/icons';
+import {Row} from 'components/atoms/row';
+import {TouchableOpacity} from 'react-native';
+import {setUserInfo} from 'store/reducers/user-reducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {STORAGEKEYS} from 'config/constants';
 
 const CustomDrawer = props => {
   const colors = useTheme().colors;
@@ -30,6 +35,8 @@ const CustomDrawer = props => {
   const {userInfo} = useAppSelector(s => s?.user);
   const user = userInfo;
 
+  const [active, setActive] = React.useState('0');
+  console.log('userInfo userInfo=======>', userInfo);
   const logOut = async () => {
     try {
       setLoading(true);
@@ -41,6 +48,23 @@ const CustomDrawer = props => {
       console.log('Error===>', UTILS.returnError(error));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const ChangeStatus = async () => {
+    try {
+      const res = await isActiveStatus({
+        is_active: userInfo?.is_active ? 0 : 1,
+      });
+      await AsyncStorage.setItem(
+        STORAGEKEYS.user,
+        JSON.stringify(res?.updatedData),
+      );
+      dispatch(setUserInfo(res?.updatedData));
+      console.log(' resp==========>', res);
+    } catch (error) {
+      console.log('Error===>', UTILS.returnError(error));
+      Alert.alert('Error-===============>', error);
     }
   };
 
@@ -73,6 +97,26 @@ const CustomDrawer = props => {
       />
       <View style={styles.line} />
       <View style={styles.innerContainer}>
+        <Row style={{alignItems: 'center', paddingHorizontal: mvs(15)}}>
+          <Regular label={'Active'} />
+          <View style={styles.activeInnerConatiner}>
+            <TouchableOpacity
+              onPress={() => {
+                ChangeStatus();
+              }}
+              style={{
+                width: mvs(20),
+                height: mvs(20),
+                borderRadius: mvs(13),
+                backgroundColor: userInfo?.is_active
+                  ? colors.green
+                  : colors.border,
+                position: 'absolute',
+                bottom: mvs(-4),
+                alignSelf: userInfo?.is_active ? 'flex-end' : 'flex-start',
+              }}></TouchableOpacity>
+          </View>
+        </Row>
         <IconButton
           onPress={() => navigate('Home')}
           title={t('dashboard')}

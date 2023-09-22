@@ -17,6 +17,7 @@ export const URLS = {
     locations: 'locations',
     logout: 'v2/auth/logout',
     update_image: 'v2/profile/image-upload',
+    user_active: 'v2/delivery-boy/activeStatus',
   },
 
   address: {

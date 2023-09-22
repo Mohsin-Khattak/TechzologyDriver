@@ -10,7 +10,7 @@ import {Alert, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 
-import {useTheme} from '@react-navigation/native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 import {Delivery} from 'assets/icons';
 import DeliveryPendingCard from 'components/molecules/delivery-pending-card';
 import DeliveredModal from 'components/molecules/modals/delivered-modal';
@@ -27,6 +27,7 @@ import {useAppSelector} from 'hooks/use-store';
 
 const PendingDelivery = props => {
   const colors = useTheme().colors;
+  const isFocus = useIsFocused();
   const {userInfo} = useAppSelector(s => s?.user);
   const userId = userInfo?.id;
 
@@ -82,7 +83,7 @@ const PendingDelivery = props => {
     if (pageNumber > 0 && !pageLoading) {
       fetchData(setPageLoading);
     }
-  }, [pageNumber, ChangeStatus]);
+  }, [pageNumber, ChangeStatus, isFocus]);
 
   const renderPendingDelivery = ({item, index}) => (
     <DeliveryPendingCard
@@ -146,7 +147,7 @@ const PendingDelivery = props => {
       setChangeStatusLoading(true);
       const res = await getChangeStatus(values);
       setDeliveredModal(false);
-      fetchData()
+      fetchData();
     } catch (error) {
       console.log('Error in getChangeStatus====>', error);
       Alert.alert('Change Statuss Error', UTILS.returnError(error));

@@ -18,11 +18,10 @@ import Medium from 'typography/medium-text';
 import {useTheme} from '@react-navigation/native';
 const OrderConfirmationModal = ({
   style,
-
   visible = false,
-
   onPressCancle,
   onClose = item => {},
+  cancelLoading,
 }) => {
   const {t} = i18n;
 
@@ -52,6 +51,7 @@ const OrderConfirmationModal = ({
               }}
             />
             <PrimaryButton
+              loading={cancelLoading}
               onPress={onPressCancle}
               title={t('confirm')}
               containerStyle={{
