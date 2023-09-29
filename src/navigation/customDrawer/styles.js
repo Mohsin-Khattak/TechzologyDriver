@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     height: mvs(10),
     backgroundColor: colors.border,
     borderRadius: mvs(5),
+    marginLeft: mvs(80),
   },
 });
 export default styles;

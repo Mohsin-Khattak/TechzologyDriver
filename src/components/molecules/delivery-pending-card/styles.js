@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: mvs(6),
     marginTop: mvs(20),
-
     borderRadius: mvs(10),
     justifyContent: 'flex-start',
     borderLeftWidth: mvs(10),

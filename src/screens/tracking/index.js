@@ -20,6 +20,7 @@ import {Marker} from 'react-native-maps';
 import {Loader} from 'components/atoms/loader';
 import {useAppSelector} from 'hooks/use-store';
 import {UTILS} from 'utils';
+import {LocationMarker} from 'assets/icons';
 
 const Tracking = props => {
   const {orderId, pending} = props?.route?.params || {};
@@ -219,93 +220,58 @@ const Tracking = props => {
             </View>
             <View style={{paddingHorizontal: mvs(20), flex: 1}}>
               <Regular label={t('time_line')} />
-              <Row>
-                <View style={{flex: 1}}>
-                  <View>
-                    <View style={styles.lineVertical} />
-                    <View
-                      style={{
-                        justifyContent: 'space-between',
-                        // height: mvs(120),
-                        gap: mvs(20),
-                      }}>
-                      <Row
-                        style={{
-                          alignItems: 'flex-start',
-                        }}>
-                        <View style={styles.circleOne} />
-                        <Row style={{marginLeft: mvs(15), gap: mvs(10)}}>
-                          <Regular
-                            style={{fontSize: mvs(12)}}
-                            label={t('delivery_boy')}
-                          />
+              <Row
+                style={{
+                  justifyContent: 'flex-start',
+                }}>
+                <View>
+                  <LocationMarker />
+                </View>
+                <View
+                  style={{
+                    paddingHorizontal: mvs(10),
+                    paddingVertical: mvs(5),
+                  }}>
+                  <Regular fontSize={mvs(12)} label={t('on_the_way')} />
 
-                          <View style={{flex: 1}}>
-                            {pending ? (
-                              <>
-                                <Regular label={t('teczology_ecommerce')} />
-                                <Regular label={t('warehouse')} />
-                              </>
-                            ) : (
-                              <Regular
-                                numberOfLines={2}
-                                fontSize={12}
-                                label={userInfo?.location?.fulladdress}
-                              />
-                            )}
-                          </View>
-                        </Row>
-                      </Row>
-                      <Row
-                        style={{
-                          alignItems: 'flex-start',
-                        }}>
-                        <View style={styles.circleOne} />
-                        <Row style={{marginLeft: mvs(15), flex: 1}}>
-                          <View style={{width: mvs(80)}}></View>
-                          <View style={{flex: 1}}>
-                            <Regular fontSize={mvs(12)} label={t('distance')} />
-                            <Row style={{paddingRight: mvs(15)}}>
-                              <Regular
-                                fontSize={mvs(12)}
-                                label={`${totalDistance?.km} km`}
-                              />
-                              <Regular
-                                fontSize={mvs(12)}
-                                label={totalDistance?.time}
-                              />
-                            </Row>
-                          </View>
-                        </Row>
-                      </Row>
-                      <Row
-                        style={{
-                          alignItems: 'flex-end',
-                          marginBottom: mvs(-10),
-                        }}>
-                        <View style={styles.circleOne} />
-                        <Row
-                          style={{
-                            alignItems: 'flex-end',
-                            marginLeft: mvs(15),
-                            flex: 1,
-                          }}>
-                          <View style={{width: mvs(80)}}>
-                            <Regular
-                              style={{fontSize: mvs(12)}}
-                              label={t('customer_address')}
-                            />
-                          </View>
-                          <View style={{flex: 1}}>
-                            <Regular
-                              fontSize={mvs(12)}
-                              label={data?.customerAddress?.address}
-                            />
-                          </View>
-                        </Row>
-                      </Row>
-                    </View>
+                  <Regular
+                    fontSize={mvs(12)}
+                    style={{marginTop: mvs(90)}}
+                    label={t('customer_address')}
+                  />
+                </View>
+                <View
+                  style={{
+                    paddingHorizontal: mvs(10),
+                    paddingVertical: mvs(5),
+                    flex: 1,
+                  }}>
+                  <View style={{height: mvs(45)}}>
+                    {pending ? (
+                      <>
+                        <Regular label={t('teczology_ecommerce')} />
+                        <Regular label={t('warehouse')} />
+                      </>
+                    ) : (
+                      <Regular
+                        numberOfLines={2}
+                        fontSize={12}
+                        label={userInfo?.location?.fulladdress}
+                      />
+                    )}
                   </View>
+                  <Regular label={t('distance')} />
+                  <Row style={{justifyContent: 'flex-start'}}>
+                    <Regular label={`${totalDistance?.km} km`} />
+                    <Regular
+                      style={{paddingHorizontal: mvs(20)}}
+                      label={totalDistance?.time}
+                    />
+                  </Row>
+                  <Regular
+                    style={{marginTop: mvs(25)}}
+                    label={data?.customerAddress?.address}
+                  />
                 </View>
               </Row>
             </View>

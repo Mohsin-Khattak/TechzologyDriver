@@ -21,7 +21,7 @@ import {isActiveStatus, logout} from 'services/api/auth-api-actions';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
-import {Language} from 'assets/icons';
+import {Clock, Language} from 'assets/icons';
 import {Row} from 'components/atoms/row';
 import {TouchableOpacity} from 'react-native';
 import {setUserInfo} from 'store/reducers/user-reducer';
@@ -97,8 +97,21 @@ const CustomDrawer = props => {
       />
       <View style={styles.line} />
       <View style={styles.innerContainer}>
-        <Row style={{alignItems: 'center', paddingHorizontal: mvs(15)}}>
-          <Regular label={'Active'} />
+        <Row
+          style={{
+            alignItems: 'center',
+            paddingHorizontal: mvs(15),
+            justifyContent: 'flex-start',
+          }}>
+          <Clock />
+          <Regular
+            style={{
+              ...styles.textStyle,
+              color: colors.text,
+              marginLeft: mvs(18),
+            }}
+            label={'Active'}
+          />
           <View style={styles.activeInnerConatiner}>
             <TouchableOpacity
               onPress={() => {

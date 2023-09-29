@@ -40,3 +40,5 @@ export {default as DeliveryThree} from './deliverythree.svg';
 export {default as Tick} from './tick.svg';
 export {default as RefundTwo} from './refundtwo.svg';
 export {default as TickTwo} from './ticktwo.svg';
+export {default as Clock} from './clock.svg';
+export {default as LocationMarker} from './location-marker.svg';
