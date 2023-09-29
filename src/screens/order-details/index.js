@@ -27,12 +27,13 @@ import {UTILS} from 'utils';
 import {Loader} from 'components/atoms/loader';
 import {useAppSelector} from 'hooks/use-store';
 import {goBack} from 'navigation/navigation-ref';
+import {Marker} from 'react-native-maps';
 
 const OrderDetails = props => {
   const colors = useTheme().colors;
 
   const {status, order, deliveryId} = props?.route?.params || {};
-  console.log('check status=======>', status);
+  // console.log('check status=======>', status);
   const {userInfo} = useAppSelector(s => s?.user);
   const userId = userInfo?.id;
   const [orderConformationModal, setOrderConfirmationModal] =
@@ -52,7 +53,7 @@ const OrderDetails = props => {
   const [amount, setAmount] = React.useState({});
   const complete = completeDeliveryHistory;
 
-  console.log(complete?.order_details?.delivery_status);
+  // console.log(complete?.order_details?.delivery_status);
 
   const fetchCompleteHistoryDetails = async () => {
     try {
@@ -96,7 +97,7 @@ const OrderDetails = props => {
       const res = await getChangeStatus(values);
       setDeliveredModal(false);
       goBack();
-      console.log(res);
+      // console.log(res);
     } catch (error) {
       console.log('Error in getChangeStatus====>', error);
       Alert.alert('Change Statuss Error', UTILS.returnError(error));
@@ -686,12 +687,20 @@ const OrderDetails = props => {
                 </View>
                 {status === '4' ? (
                   <View style={styles.mapContainer}>
-                    <CustomMap>
+                    <CustomMap
+                      initialRegion={{
+                        latitude: origin.latitude,
+                        longitude: origin.longitude,
+                        latitudeDelta: 0.05,
+                        longitudeDelta: 0.05,
+                      }}>
                       <MapDirections
                         waypoints={path}
                         origin={origin}
                         destination={destination}
                       />
+                      <Marker coordinate={origin} />
+                      <Marker coordinate={destination}></Marker>
                     </CustomMap>
                   </View>
                 ) : (

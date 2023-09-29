@@ -13,7 +13,7 @@ import {t} from 'i18next';
 
 const DeliveryCompletedCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
-  console.log(item);
+
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <Row
